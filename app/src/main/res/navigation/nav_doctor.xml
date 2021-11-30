@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_doctor"
+    app:startDestination="@id/fragment_doctor_detail">
+
+    <fragment
+        android:id="@+id/fragment_doctor_detail"
+        android:name="com.ptithcm.healthcare.view.doctor.DoctorDetailFragment"
+        tools:layout="@layout/fragment_doctor_detail"/>
+
+    <fragment
+        android:id="@+id/fragment_over_view"
+        android:name="com.ptithcm.healthcare.view.wishlist.OverViewFragment"
+        tools:layout="@layout/fragment_over_view"/>
+
+    <fragment
+        android:id="@+id/imageVideoFragment"
+        android:name="com.ptithcm.healthcare.view.rating.ImageVideoFragment"
+        tools:layout="@layout/fragment_image_video"/>
+
+    <fragment
+        android:id="@+id/sizeGuideFragment"
+        tools:layout="@layout/fragment_size_guide"
+        android:name="com.ptithcm.healthcare.view.sizeguide.SizeGuideFragment"
+        android:label="SizeGuideFragment" />
+    <fragment
+        android:id="@+id/questionFragment"
+        tools:layout="@layout/fragment_question"
+        android:name="com.ptithcm.healthcare.view.question.QuestionFragment"
+        android:label="QuestionFragment" />
+
+    <fragment
+        android:id="@+id/ratingFragment"
+        android:name="com.ptithcm.healthcare.view.rating.RatingFragment"
+        android:label="RatingFragment" />
+
+    <fragment
+        android:id="@+id/createReviewFragment"
+        android:name="com.ptithcm.healthcare.view.rating.CreateReviewFragment"
+        tools:layout="@layout/fragment_create_review"
+        android:label="CreateReviewFragment" />
+
+</navigation>

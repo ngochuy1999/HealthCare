@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.ptithcm.core.model.Doctor" />
+
+        <variable
+            name="fragment"
+            type="com.ptithcm.healthcare.view.doctor.DoctorDetailFragment" />
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/layout_margin_16dp"
+                android:paddingTop="@dimen/layout_margin_16dp"
+                android:paddingEnd="@dimen/layout_margin_16dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_desDoctor"
+                    style="@style/normal_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/bg_corner_white"
+                    app:layout_constraintDimensionRatio=".9"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvName"
+                        style="@style/normal_text.SemiBold"
+                        android:text="@{item.firstName}"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tool:text="DOCTOR NAME" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvSpecialize"
+                        style="@style/normal_text.grey"
+                        android:text="@{item.speciality.name}"
+                        android:textColor="#757575"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tvName"
+                        tool:text="@string/specialize" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_des"
+                        style="@style/normal_text"
+                        android:textAlignment="textStart"
+                        setTextHtml="@{item.description}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvSpecialize" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_login"
+                    app:civ_border_color="#FFFFFF"
+                    app:civ_border_width="2dp"
+                    app:layout_constraintBottom_toTopOf="@id/layout_desDoctor"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/layout_desDoctor" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="8dp"
+                    android:layout_marginStart="@dimen/layout_margin_16dp"
+                    android:layout_marginTop="@dimen/layout_margin_8dp"
+                    android:layout_marginEnd="@dimen/layout_margin_16dp"
+                    android:background="@android:color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_desDoctor"
+                    app:tabBackground="@drawable/indicator_selector"
+                    app:tabGravity="center"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMaxWidth="15dp"
+                    app:tabPadding="0dp" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lnExperience"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_corner_white"
+                    app:layout_constraintStart_toStartOf="@+id/layout_desDoctor"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_desDoctor">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv"
+                        style="@style/normal_text.grey"
+                        android:text="@string/experience"
+                        android:textColor="#757575"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_experience"
+                        style="@style/normal_text"
+                        android:text="@{item.yearExperience}"
+                        android:textColor="@color/blue"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tool:text="experience" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lnTime"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="@drawable/bg_corner_white"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lnExperience">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_timeAdvise"
+                        style="@style/normal_text.grey"
+                        android:text="@{item.timeAdvise.toString()+` Phút`}"
+                        android:textColor="#689F38"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tool:text="timeAdvise" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_timeAdvise1"
+                        style="@style/normal_text.grey"
+                        android:textAlignment="center"
+                        android:text="@string/time_advise"
+                        android:textColor="#757575"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lnFavorite"
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:background="@drawable/bg_corner_white"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/lnExperience">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_favorite1"
+                        style="@style/normal_text.grey"
+                        android:text="@string/favorite"
+                        android:textColor="#757575"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_favorite"
+                        style="@style/normal_text.grey"
+                        android:text="100%"
+                        android:textColor="@color/red"
+                        android:textSize="20sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tool:text="timeAdvise" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <RatingBar
+                    android:id="@+id/rbAverage"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:isIndicator="true"
+                    android:onClick="@{(v) -> fragment.onClick(v)}"
+                    app:layout_constraintStart_toStartOf="@+id/lnExperience"
+                    app:layout_constraintTop_toBottomOf="@+id/lnExperience"
+                    tool:rating="5" />
+
+                <TextView
+                    android:id="@+id/tvRatingCount"
+                    style="@style/TextAppearance.MaterialComponents.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:onClick="@{(v) -> fragment.onClick(v)}"
+                    android:paddingHorizontal="@dimen/layout_margin_10dp"
+                    android:textColor="@color/black_alpha"
+                    app:layout_constraintBottom_toBottomOf="@id/rbAverage"
+                    app:layout_constraintStart_toEndOf="@id/rbAverage"
+                    app:layout_constraintTop_toTopOf="@id/rbAverage"
+                    tool:text="5 nhận xét" />
+
+                <LinearLayout
+                    android:id="@+id/lnScript"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRatingCount"
+                    tool:layout_editor_absoluteX="16dp">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnConsult"
+                        style="@style/TextNormal"
+                        android:background="@drawable/bg_corner_white"
+                        android:onClick="@{(v) -> fragment.onClick(v)}"
+                        android:text="@string/consultations"
+                        android:textSize="@dimen/text_size_12sp" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/layout_l2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_corner_white"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@+id/layout_desDoctor"
+                        tool:layout_editor_absoluteX="16dp">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rv_consult"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            tool:itemCount="3" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <View
+                        style="@style/divider"
+                        android:layout_width="match_parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnQuestions"
+                        style="@style/TextNormal"
+                        android:background="@drawable/bg_corner_white"
+                        android:onClick="@{(v) -> fragment.onClick(v)}"
+                        android:text="@string/comment"
+                        android:textSize="@dimen/text_size_12sp" />
+
+                    <View
+                        style="@style/divider"
+                        android:layout_width="match_parent" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnRating"
+                        style="@style/TextNormal"
+                        android:background="@drawable/bg_corner_white"
+                        android:onClick="@{(v) -> fragment.onClick(v)}"
+                        android:text="@string/rating"
+                        android:textSize="@dimen/text_size_12sp" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

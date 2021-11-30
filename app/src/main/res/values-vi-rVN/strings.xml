@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id">750568243524-fkv856104t4v10hoqi590u707eh7q0km.apps.googleusercontent.com</string>
+    <string name="qr_code">Quét mã QR để tạo phiếu khám bệnh</string>
+    <string name="doctor">Bác Sĩ</string>
+    <string name="clinic">Phòng Khám</string>
+    <string name="hospital">Bệnh Viện</string>
+    <string name="show_all">Xem tất cả >></string>
+    <string name="top_doctor">Bác sĩ nổi bật</string>
+    <string name="specialize">Chuyên khoa</string>
+    <string name="home">Trang Chủ</string>
+    <string name="calendar">Lịch Khám</string>
+    <string name="file">Hồ Sơ</string>
+    <string name="notification">Thông Báo</string>
+    <string name="profile">Tài Khoản</string>
+    <string name="ex_calendar">LỊCH KHÁM</string>
+    <string name="examination_id">Mã phiếu khám, tên bác sĩ</string>
+    <string name="text_description_empty_bill">Bạn chưa có lịch khám nào</string>
+    <string name="file_login">Đăng nhập để xem \n hồ sơ của bạn</string>
+    <string name="patient">Hồ sơ bệnh án</string>
+    <string name="health_record">Hồ sơ sức khỏe</string>
+    <string name="like_doctor">Bác sĩ yêu thích</string>
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng ký</string>
+    <string name="about_us">Về chúng tôi</string>
+    <string name="terms_and_conditions">Điều khoản &amp; Điều kiện</string>
+    <string name="contact_us">Liên hệ chúng tôi</string>
+    <string name="my_details">Chi tiết tài khoản</string>
+    <string name="change_password">Đổi mật khẩu</string>
+    <string name="medical_book">Lịch sử khám bệnh</string>
+    <string name="complete">Hoàn thành</string>
+    <string name="dont_have_account"><font fgcolor="#989898">Bạn chưa có tài khoản?</font> Tham gia với chúng tôi</string>
+    <string name="forgot_password">Quên mật khẩu?</string>
+    <string name="sign_in">ĐĂNG NHẬP</string>
+    <string name="have_account"><font fgcolor="#989898">Bạn đã có tài khoản?</font> <u>Đăng Nhập</u></string>
+    <string name="create_account">TẠO TÀI KHOẢN</string>
+    <string name="experience">Kinh nghiệm</string>
+    <string name="time_advise">Tư vấn trung bình</string>
+    <string name="favorite">Độ hài lòng</string>
+    <string name="consultations">Lịch tư vấn</string>
+    <string name="don_t_have_an_account">Không có tài khoản?</string>
+    <string name="join_us">Tham gia</string>
+    <string name="comment">Câu hỏi</string>
+    <string name="rating">Đánh giá</string>
+    <string name="set_touchId">Cài đặt TouchID của bạn để đăng nhập thay cho mật khẩu</string>
+    <string name="wrong_fingerprint">Sai vân tay</string>
+    <string name="btn_ok_verifi">OK</string>
+    <string name="biometric">Cài đặt vân tay</string>
+    <string name="use_touchId">Đăng nhập bằng TouchID</string>
+    <string name="use_touchid2">Sử dụng TouchID của bạn để đăng nhập thay cho mật khẩu</string>
+    <string name="login_success">Đăng nhập thành công</string>
+    <string name="being_examined">Đang Khám</string>
+    <string name="waiting">Waiting</string>
+    <string name="not_add_bill">Không tạo được phiếu khám bệnh</string>
+    <string name="add_bill">Tạo phiếu khám bệnh thành công</string>
+    <string name="identity_card">CMND</string>
+    <string name="gender">Giới tính</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="birthday">Ngày sinh</string>
+    <string name="address">Địa chỉ</string>
+    <string name="invalid_identity">Invailid Identity</string>
+    <string name="create_profile">Thông tin cá nhân</string>
+    <string name="error_empty">%s không được để trống</string>
+</resources>

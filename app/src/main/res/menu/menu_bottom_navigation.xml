@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/nav_home"
+        android:contentDescription="@string/home"
+        android:icon="@drawable/home_selector"
+        android:orderInCategory="1"
+        android:title="@string/home" />
+
+    <item
+        android:id="@+id/nav_calendar"
+        android:contentDescription="@string/calendar"
+        android:icon="@drawable/calendar_selector"
+        android:orderInCategory="2"
+        android:title="@string/calendar" />
+
+    <item
+        android:id="@+id/nav_file"
+        android:contentDescription="@string/file"
+        android:icon="@drawable/file_selector"
+        android:orderInCategory="3"
+        android:title="@string/file" />
+
+    <item
+        android:id="@+id/nav_message"
+        android:contentDescription="@string/notification"
+        android:icon="@drawable/notification_selector"
+        android:orderInCategory="4"
+        android:title="@string/notification" />
+
+
+    <item
+        android:id="@+id/nav_profile"
+        android:contentDescription="@string/profile"
+        android:icon="@drawable/profile_selector"
+        android:orderInCategory="5"
+        android:title="@string/profile" />
+</menu>

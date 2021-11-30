@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_calendar"
+    app:startDestination="@id/fragment_calendar">
+
+    <include app:graph="@navigation/nav_categories_detail" />
+    <fragment android:id="@+id/fragment_calendar"
+        tools:layout="@layout/fragment_calendar"
+        android:name="com.ptithcm.healthcare.view.calendar.CalendarFragment">
+    </fragment>
+
+
+    <include app:graph="@navigation/nav_shopping_card" />
+
+    <include app:graph="@navigation/nav_search" />
+
+    <include app:graph="@navigation/nav_product" />
+
+</navigation>

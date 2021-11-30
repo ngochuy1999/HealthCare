@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="gray">#D5D5D5</color>
+    <color name="gray_dark">#B4B3B3</color>
+    <color name="black">#000000</color>
+    <color name="black_alpha">#99413E3E</color>
+    <color name="gray_stroke">#D5D5D5</color>
+    <color name="line">#E7E7E7</color>
+    <color name="colorBackground">#f3f5f8</color>
+    <color name="colorTextDiscount">#ffe9d833</color>
+    <color name="background">#fff3f5f8</color>
+    <color name="progress_line">#faab1a</color>
+    <color name="gray_light">#F8FAFD</color>
+    <color name="blue">#2B63F0</color>
+    <color name="red">#F44336</color>
+    <color name="green">#9DD31C</color>
+    <color name="green_dark">#B0C72A</color>
+    <color name="trans">#00000000</color>
+    <color name="text_gray">#989898</color>
+    <color name="gray_section">#F5F5F5</color>
+    <color name="orange">#E64D1C</color>
+    <color name="color_tag_bg">#9a9898</color>
+    <color name="greenDark1">#0A390C</color>
+    <color name="yellow">#E8B724</color>
+    <color name="gray2">#DDDDDD</color>
+
+    <color name="highlight">#F78900</color>
+    <color name="bg_color">#f9f9f9</color>
+    <color name="bg_color_in_white">#f3f3f3</color>
+    <color name="text_color">#333333</color>
+    <color name="text_color_overlay">#90333333</color>
+    <color name="sub_text_color">#666666</color>
+    <color name="brown_grey_two">#979797</color>
+
+
+    <color name="fb_color">#3c5a99</color>
+    <color name="blue_cyan">#00BCD4</color>
+    <color name="placeholder">#f9f9f9</color>
+    <color name="high_light_text">#1AE1363C</color>
+    <color name="darkBrown">#2B2828</color>
+    <color name="lightColor">#64E71A</color>
+    <color name="colorTranslucent">#50000000</color>
+    <color name="colorGrayBtn">#9C9B9B</color>
+    <color name="colorWhite50">#7BFFFFFF</color>
+    <color name="colorBlueLight">#2196F3</color>
+    <color name="colorBlueDark">#1467AA</color>
+    <color name="blueDark">#053E6C</color>
+    <color name="blueLight">#96D0FF</color>
+
+</resources>

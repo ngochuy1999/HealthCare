@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:id="@+id/llEditPassword"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="340dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtTouchID"
+                        style="@style/normal_text"
+                        android:textAlignment="textStart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dp"
+                        android:padding="14dp"
+                        android:text="@string/use_touchId"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_width="340dp"
+                        style="@style/normal_text.Medium"
+                        android:textAlignment="textStart"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="10dp"
+                        android:paddingStart="14dp"
+                        android:text="@string/use_touchid2"
+                        android:textColor="@color/blue"
+                        android:textSize="15sp"
+                        tools:ignore="RtlSymmetry" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/swTouch"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <ProgressBar
+            android:id="@+id/progressEditProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

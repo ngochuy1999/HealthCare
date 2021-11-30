@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="profile"
+            type="com.ptithcm.core.model.Profile" />
+
+        <import type="com.ptithcm.healthcare.util.DateUtils"/>
+
+        <variable
+            name="fragment"
+            type="com.ptithcm.healthcare.view.mydetail.MyDetailFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtName"
+            style="@style/normal_text.EditText.Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_40dp"
+            android:textCursorDrawable="@drawable/gray_cursor"
+            android:drawableStart="@drawable/ic_name_field"
+            android:gravity="center_vertical"
+            android:hint="@string/name"
+            android:text="@{profile.name}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtPhone"
+            style="@style/normal_text.EditText.Register"
+            android:textCursorDrawable="@drawable/gray_cursor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_name_field"
+            android:gravity="center_vertical"
+            android:hint="@string/phone"
+            android:inputType="phone"
+            android:text="@{profile.account.phone}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtName" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtCMND"
+            style="@style/normal_text.EditText.Register"
+            android:textCursorDrawable="@drawable/gray_cursor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_name_field"
+            android:gravity="center_vertical"
+            android:hint="@string/identity_card"
+            android:text="@{profile.identityCard}"
+            android:inputType="number"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtPhone" />
+
+        <RadioGroup
+            android:id="@+id/edt_gender"
+            style="@style/normal_text.EditText.Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/edtCMND"
+            android:orientation="horizontal">
+
+            <TextView
+                android:fontFamily="@font/montserrat_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textCursorDrawable="@drawable/gray_cursor"
+                android:hint="@string/gender"
+                app:drawableStartCompat="@drawable/ic_gender_svgrepo_com" />
+
+            <RadioButton
+                android:id="@+id/radio_male"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="@dimen/sb_size_40"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/male"
+                android:checked="@{(profile.gender==0)? true : false}"
+                android:textColor="@color/gray_dark" />
+
+            <RadioButton
+                android:id="@+id/radio_female"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginStart="40dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/female"
+                android:checked="@{(profile.gender==1)? true : false}"
+                android:textCursorDrawable="@drawable/gray_cursor"
+                android:textColor="@color/gray_dark"/>
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_birthday"
+            style="@style/normal_text.EditText.Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_birthday_cake_svgrepo_com"
+            android:gravity="center_vertical"
+            android:hint="@string/birthday"
+            android:text="@{DateUtils.convertFormat(profile.birthday, DateUtils.DEFAULT_COMMENT_FORMAT, DateUtils.DEFAULT_DATE_FORMAT)}"
+            android:onClick="@{(v) -> fragment.onClick(v)}"
+            android:focusable="false"
+            android:inputType="none"
+            android:textCursorDrawable="@drawable/gray_cursor"
+            app:layout_constraintTop_toBottomOf="@+id/edt_gender" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_address"
+            style="@style/normal_text.EditText.Register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_address"
+            android:gravity="center_vertical"
+            android:hint="@string/address"
+            android:text="@{profile.address}"
+            android:textCursorDrawable="@drawable/gray_cursor"
+            app:layout_constraintTop_toBottomOf="@+id/edt_birthday" />
+
+
+        <com.ptithcm.healthcare.widget.LoadingButton
+            android:id="@+id/btn_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layout_margin_32dp"
+            android:layout_marginTop="@dimen/layout_margin_40dp"
+            android:layout_marginRight="@dimen/layout_margin_32dp"
+            android:onClick="@{(v) -> fragment.onClick(v)}"
+            app:text="@string/save_changes"
+            android:layout_marginBottom="@dimen/layout_margin_64dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

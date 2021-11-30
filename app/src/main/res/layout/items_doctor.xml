@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="doctor"
+            type="com.ptithcm.core.model.Doctor" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_margin_16dp"
+        android:paddingEnd="@dimen/layout_margin_16dp"
+        android:background="@color/white"
+        android:paddingTop="@dimen/layout_margin_8dp"
+        android:layout_marginTop="@dimen/layout_margin_12dp">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/doctor"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            style="@style/normal_text.SemiBold"
+            android:layout_width="@dimen/no_padding"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{doctor.firstName}"
+            android:textAlignment="viewStart"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="@+id/avatar"
+            tools:text="DOCTOR NAME" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSpecialize"
+            style="@style/normal_text.grey"
+            android:text="@{doctor.speciality.name}"
+            android:textColor="#757575"
+            app:layout_constraintStart_toStartOf="@id/tvName"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            tools:text="@string/specialize" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_address"
+            style="@style/normal_text.grey"
+            android:layout_marginTop="10dp"
+            android:text="@{doctor.address}"
+            android:textColor="#757575"
+            app:layout_constraintStart_toStartOf="@+id/tvSpecialize"
+            app:layout_constraintTop_toBottomOf="@+id/tvSpecialize"
+            tools:text="@string/address_book" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_experience"
+            style="@style/normal_text.grey"
+            android:layout_marginTop="10dp"
+            android:text="@{doctor.yearExperience}"
+            android:textColor="@color/blue"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/tv"
+            app:layout_constraintTop_toBottomOf="@+id/tv_address"
+            tools:text="experience" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv"
+            style="@style/normal_text.grey"
+            android:text="@string/experience"
+            android:textColor="#757575"
+            app:layout_constraintStart_toStartOf="@+id/tv_address"
+            app:layout_constraintTop_toBottomOf="@+id/tv_experience" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_timeAdvise"
+            style="@style/normal_text.grey"
+            android:text="@{doctor.timeAdvise.toString()}"
+            android:textColor="#689F38"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_timeAdvise1"
+            app:layout_constraintTop_toTopOf="@+id/tv_experience"
+            tools:text="timeAdvise" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_timeAdvise1"
+            style="@style/normal_text.grey"
+            android:layout_marginStart="55dp"
+            android:text="@string/time_advise"
+            android:textColor="#757575"
+            app:layout_constraintStart_toEndOf="@+id/tv"
+            app:layout_constraintTop_toBottomOf="@+id/tv_timeAdvise" />
+
+
+        <View
+            android:id="@+id/view"
+            style="@style/divider"
+            android:layout_height="0.6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
