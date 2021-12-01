@@ -10,6 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.ptithcm.core.CoreApplication
 import com.ptithcm.core.param.LogInParam
 import com.ptithcm.core.util.*
@@ -42,6 +44,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private var token: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -165,6 +168,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }else{
                 messageHandler?.runMessageHandler(it.message?:"Đăng nhập thành công")
                 it.data?.let { it1 -> CoreApplication.instance.saveAccount(it1) }
+                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                    task.result?.let { requireContext().setStringPref(TOKEN_FCM, it) }
+                } )
+                token = requireContext().getStringPref(TOKEN_FCM)
+                authViewModel.changeFCMToken(it.data?.accountId,token)
+
 
                 it.data?.let { it1 -> authViewModel.getProfile(it1.accountId) }
 

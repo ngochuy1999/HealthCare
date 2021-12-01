@@ -179,7 +179,7 @@ class QRCodeFragment : BaseFragment<FragmentQrcodeBinding>(), ZBarScannerView.Re
             toast(contents)
 
         }
-        scannerView.resumeCameraPreview(this)
+        //scannerView.resumeCameraPreview(this)
     }
 
 

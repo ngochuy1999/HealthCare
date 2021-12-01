@@ -20,6 +20,10 @@ interface ApiHealthCareService {
     @POST("/api/forgot-password")
     suspend fun forgotPassword(@Query("email") email: String): Response<ObjectResponse<String>>
 
+    @PUT("/api/fcm-token")
+    suspend fun changeFCMToken(@Query("id") accountId: Int?,
+                               @Query("token") token: String?): Response<ObjectResponse<String>>
+
     @POST("/api/signUp")
     suspend fun signUp(@Body acc: AccountParam): Response<ObjectResponse<Account>>
 

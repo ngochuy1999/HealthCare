@@ -153,7 +153,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                         task.result?.let { requireContext().setStringPref(TOKEN_FCM, it) }
                     } )
                     token = requireContext().getStringPref(TOKEN_FCM)
-                    token?.let { toast(it) }
                     authViewModel.signUp(
                         AccountParam(
                             phone = viewBinding.edtPhone.text.toString(),

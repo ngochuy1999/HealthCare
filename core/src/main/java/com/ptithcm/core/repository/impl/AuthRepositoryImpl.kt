@@ -26,6 +26,19 @@ class AuthRepositoryImpl(val api: ApiService, val apiHealthCare: ApiHealthCareSe
         }.build().asLiveData()
     }
 
+    override suspend fun changeFCMToken(
+        accountId: Int?,
+        token: String?
+    ): LiveData<Result<ObjectResponse<String>>> {
+        return object : NetworkBoundResource<ObjectResponse<String>, ObjectResponse<String>>() {
+            override fun processResponse(response: ObjectResponse<String>): ObjectResponse<String>? =
+                response
+
+            override suspend fun createCall(): Response<ObjectResponse<String>> =
+                apiHealthCare.changeFCMToken(accountId,token)
+        }.build().asLiveData()
+    }
+
     override suspend fun logOut(): LiveData<Result<Void>> {
         return object : NetworkBoundResource<Void, Void>() {
 

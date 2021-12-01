@@ -62,4 +62,5 @@
     <string name="invalid_identity">Invailid Identity</string>
     <string name="create_profile">Thông tin cá nhân</string>
     <string name="error_empty">%s không được để trống</string>
+    <string name="default_notification_channel_id">fcm_health_care</string>
 </resources>

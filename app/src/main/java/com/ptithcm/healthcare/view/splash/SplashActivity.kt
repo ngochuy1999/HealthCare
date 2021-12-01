@@ -1,5 +1,11 @@
 package com.ptithcm.healthcare.view.splash
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.media.AudioAttributes
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.ptithcm.core.CoreApplication
@@ -18,6 +24,30 @@ class SplashActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            val soundUri: Uri = Uri.parse(
+                "android.resource://" +
+                        applicationContext.packageName +
+                        "/" +
+                        R.raw.alarm)
+
+            val audioAttributes = AudioAttributes.Builder()
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .setUsage(AudioAttributes.USAGE_NOTIFICATION_RINGTONE)
+                .build()
+
+            val channel = NotificationChannel(getString(R.string.default_notification_channel_id),
+                "FCM Notification",
+                NotificationManager.IMPORTANCE_HIGH)
+            channel.setSound(soundUri, audioAttributes)
+            channel.enableVibration(true)
+
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+
+        }
+
         setContentView(R.layout.activity_splash)
         currentAccount = CoreApplication.instance.profile
         if(currentAccount == null){

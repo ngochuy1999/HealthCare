@@ -16,4 +16,5 @@ interface AuthRepository {
     suspend fun getProfile(pid: Int): LiveData<Result<ObjectResponse<Profile>>>
     suspend fun logOut(): LiveData<Result<Void>>
     suspend fun requestForgotPassword(param: String): LiveData<Result<ObjectResponse<String>>>
+    suspend fun changeFCMToken(accountId: Int?, token: String?): LiveData<Result<ObjectResponse<String>>>
 }

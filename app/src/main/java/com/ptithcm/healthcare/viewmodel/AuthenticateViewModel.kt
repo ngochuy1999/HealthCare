@@ -20,6 +20,7 @@ class AuthenticateViewModel(private val repository: AuthRepository) : ViewModel(
     val profileLiveData = MediatorLiveData<ObjectResponse<Profile>>()
     val logOutLiveData = MediatorLiveData<String>()
     val forgotPasswordLiveData = MediatorLiveData<String>()
+    val changeFcmTokenLiveData = MediatorLiveData<ObjectResponse<String>>()
     val error = MutableLiveData<Pair<String, Int?>>()
 
     fun logIn(param: LogInParam) {
@@ -106,6 +107,21 @@ class AuthenticateViewModel(private val repository: AuthRepository) : ViewModel(
                     }
                     is Result.Success -> {
                         forgotPasswordLiveData.value = it.data?.message
+                    }
+                }
+            }
+        }
+    }
+
+    fun changeFCMToken(accountId: Int?, token: String?) {
+        viewModelScope.launch {
+           changeFcmTokenLiveData.addSource(repository.changeFCMToken(accountId,token)) {
+                when (it) {
+                    is Result.Error -> {
+                        error.value = Pair(it.message, it.code)
+                    }
+                    is Result.Success -> {
+                        changeFcmTokenLiveData.value = it.data
                     }
                 }
             }
