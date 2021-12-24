@@ -1,10 +1,7 @@
 package com.ptithcm.core.repository
 
 import androidx.lifecycle.LiveData
-import com.ptithcm.core.model.Basket
-import com.ptithcm.core.model.Brand
-import com.ptithcm.core.model.MedicalBill
-import com.ptithcm.core.model.ProductClothesDetail
+import com.ptithcm.core.model.*
 import com.ptithcm.core.model.wish.ObjectResponse
 import com.ptithcm.core.param.AddProductParam
 import com.ptithcm.core.param.MedicalBillParam
@@ -26,7 +23,13 @@ interface ShoppingCardRepository {
 
     suspend fun getAllConsult(id: Int): LiveData<Result<ArrayList<MedicalBill>>>
 
+    suspend fun getTestForm(id: Int): LiveData<Result<ArrayList<TestForm>>>
+
     suspend fun getAllConsultPatient(id: Int): LiveData<Result<ArrayList<MedicalBill>>>
 
     suspend fun addMedicalBill(medicalBillParam: MedicalBillParam): LiveData<Result<ObjectResponse<MedicalBill>>>
+
+    suspend fun checkIsLike(pid: Int?, doctorId: Int): LiveData<Result<ObjectResponse<Boolean>>>
+
+    suspend fun getResultDetail(resultId: Int?): LiveData<Result<ArrayList<TestResultDetail>>>
 }

@@ -1,5 +1,6 @@
 package com.ptithcm.healthcare.util
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Bitmap
@@ -210,6 +211,7 @@ class FileUtil {
         return timeInMillisec
     }
 
+    @SuppressLint("WrongConstant")
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Throws(IOException::class)
     fun genVideoUsingMuxer(

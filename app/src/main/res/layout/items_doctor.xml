@@ -16,22 +16,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/layout_margin_16dp"
-        android:paddingEnd="@dimen/layout_margin_16dp"
-        android:background="@color/white"
-        android:paddingTop="@dimen/layout_margin_8dp"
-        android:layout_marginTop="@dimen/layout_margin_12dp">
+        android:paddingStart="@dimen/layout_margin_8dp"
+        android:paddingEnd="@dimen/layout_margin_8dp"
+        android:background="@color/white">
 
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar"
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:layout_marginTop="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/doctor"
             app:civ_border_color="#FFFFFF"
             app:civ_border_width="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +43,8 @@
             android:text="@{doctor.firstName}"
             android:textAlignment="viewStart"
             android:textAllCaps="true"
+            android:singleLine="false"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/avatar"
             app:layout_constraintTop_toTopOf="@+id/avatar"
             tools:text="DOCTOR NAME" />
@@ -61,9 +61,12 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_address"
             style="@style/normal_text.grey"
+            android:layout_width="0dp"
             android:layout_marginTop="10dp"
+            android:singleLine="false"
             android:text="@{doctor.address}"
             android:textColor="#757575"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvSpecialize"
             app:layout_constraintTop_toBottomOf="@+id/tvSpecialize"
             tools:text="@string/address_book" />
@@ -90,7 +93,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_timeAdvise"
             style="@style/normal_text.grey"
-            android:text="@{doctor.timeAdvise.toString()}"
+            android:text="@{doctor.timeAdvise.toString()+` Phút`}"
             android:textColor="#689F38"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="@+id/tv_timeAdvise1"
@@ -100,9 +103,9 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_timeAdvise1"
             style="@style/normal_text.grey"
-            android:layout_marginStart="55dp"
             android:text="@string/time_advise"
             android:textColor="#757575"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv"
             app:layout_constraintTop_toBottomOf="@+id/tv_timeAdvise" />
 
@@ -111,9 +114,11 @@
             android:id="@+id/view"
             style="@style/divider"
             android:layout_height="0.6dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

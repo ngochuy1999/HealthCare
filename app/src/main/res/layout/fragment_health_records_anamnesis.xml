@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/drug_allergy"
+        style="@style/normal_text.bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/drug_allergy"
+        android:textSize="@dimen/sb_text_size_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/apply_drug_allergy"
+        style="@style/normal_text.grey"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/apply_it_here"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/sb_text_size_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/sick"
+        style="@style/normal_text.bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/sick"
+        android:textSize="@dimen/sb_text_size_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/drug_allergy" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/apply_sick"
+        style="@style/normal_text.grey"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/apply_it_here"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/sb_text_size_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apply_drug_allergy" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/surgery"
+        style="@style/normal_text.bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/surgery"
+        android:textSize="@dimen/sb_text_size_16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sick" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/apply_surgery"
+        style="@style/normal_text.grey"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/apply_it_here"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/sb_text_size_16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/apply_sick" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

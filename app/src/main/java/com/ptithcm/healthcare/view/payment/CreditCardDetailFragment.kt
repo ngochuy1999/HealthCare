@@ -197,7 +197,7 @@ class CreditCardDetailFragment : BaseFragment<FragmentDetailCreditCardBinding>()
         when (v?.id) {
             R.id.btnAddPayment -> {
                 isPopBackStack = true
-                    if (viewBinding.edtName.text.toString().trim().split(" ").size == 1) {
+                    if (viewBinding.edtName.text.toString().trim ().split(" ").size == 1) {
                         messageHandler?.runMessageErrorHandler(getString(R.string.please_enter_your_full_name))
                     } else {
                         changStatusButton(true)

@@ -24,11 +24,34 @@
 
     <include  app:graph="@navigation/nav_carousel_detail"/>
     <include  app:graph="@navigation/nav_categories_detail"/>
-    <include app:graph="@navigation/nav_shopping_card" />
 
     <include app:graph="@navigation/nav_search" />
     <include app:graph="@navigation/nav_doctor"/>
     <include app:graph="@navigation/nav_qrcode" />
+    <fragment
+        android:id="@+id/listDoctorFragment"
+        android:name="com.ptithcm.healthcare.view.doctor.ListDoctorFragment"
+        android:label="ListDoctorFragment"
+        tools:layout="@layout/fragment_list_doctor"/>
+    <fragment
+        android:id="@+id/listSpecializeFragment"
+        android:name="com.ptithcm.healthcare.view.specialize.ListSpecializeFragment"
+        android:label="ListSpecializeFragment"
+        tools:layout="@layout/fragment_list_specialize"/>
+    <fragment
+        android:id="@+id/doctorBySpecialFragment"
+        android:name="com.ptithcm.healthcare.view.doctor.DoctorBySpecialFragment"
+        android:label="DoctorBySpecialFragment" />
+    <fragment
+        android:id="@+id/listClinicFragment"
+        android:name="com.ptithcm.healthcare.view.clinic.ListClinicFragment"
+        android:label="ListClinicFragment" />
+
+    <fragment
+        android:id="@+id/documentFragment"
+        android:name="com.ptithcm.healthcare.view.document.DocumentFragment"
+        tools:layout="@layout/fragment_document"
+        android:label="DocumentFragment" />
 
 
 </navigation>

@@ -9,6 +9,7 @@ import com.ptithcm.core.param.UpdateAddressParam
 import com.ptithcm.core.vo.ItemViewModel
 import com.ptithcm.core.vo.Listing
 import com.ptithcm.core.vo.Result
+import okhttp3.ResponseBody
 
 
 interface UserRepository {
@@ -27,4 +28,10 @@ interface UserRepository {
     ): Listing<ItemViewModel>
 
     suspend fun getInvoiceDetail(invoiceId: Int?): LiveData<Result<ObjectResponse<InvoiceDetail>>>
+    suspend fun updateImage(url: String): LiveData<Result<ObjectResponse<Account>>>
+    suspend fun updateCover(url: String): LiveData<Result<ObjectResponse<Account>>>
+    suspend fun getMedicalRecord(pid: Int?): LiveData<Result<ArrayList<MedicalRecord>>>
+    suspend fun getTestResult(accountId: Int?): LiveData<Result<ArrayList<TestResult>>>
+    suspend fun getTreatmentRegiment(recordId: Int?): LiveData<Result<TreatmentRegiment>>
+    suspend fun getAppInfo(): LiveData<Result<Info>>
 }

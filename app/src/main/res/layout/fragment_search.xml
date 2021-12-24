@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:hint="Search all product"
+            android:hint="Search for everything"
             android:paddingStart="@dimen/layout_margin_48dp"
             android:paddingTop="@dimen/layout_margin_16dp"
             android:paddingEnd="@dimen/layout_margin_16dp"

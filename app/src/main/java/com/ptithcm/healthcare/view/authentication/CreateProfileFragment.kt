@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.textfield.TextInputEditText
 import com.ptithcm.core.BuildConfig
 import com.ptithcm.core.CoreApplication
+import com.ptithcm.core.model.Account
 import com.ptithcm.core.model.Profile
 import com.ptithcm.core.param.ProfileParam
 import com.ptithcm.healthcare.R
@@ -40,6 +41,7 @@ import com.ptithcm.healthcare.util.getCurrentDateInMills
 import com.ptithcm.healthcare.view.MainActivity
 import com.ptithcm.healthcare.view.profile.ProfileCropImageActivity
 import com.ptithcm.healthcare.viewmodel.AuthenticateViewModel
+import com.ptithcm.healthcare.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_create_profile.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -63,6 +65,8 @@ class CreateProfileFragment : BaseFragment<FragmentCreateProfileBinding>() , Vie
     private var photoStoragePath: String? = null
     private var photoType: PhotoType? = null
     private val authViewModel: AuthenticateViewModel by viewModel()
+    private val userViewModel: UserViewModel by viewModel()
+    private var currentAccount: Account? = null
     private var typeface: Typeface? = null
     private var gender : Int? = 0
 
@@ -76,6 +80,18 @@ class CreateProfileFragment : BaseFragment<FragmentCreateProfileBinding>() , Vie
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        currentAccount = CoreApplication.instance.account
+        val glideApp = Glide.with(context!!)
+        glideApp.load(currentAccount?.cover)
+            .placeholder(R.color.white)
+            .centerCrop()
+            .error(R.drawable.bg_login)
+            .into(viewBinding.cover)
+
+        glideApp.load(currentAccount?.avatar)
+            .placeholder(R.color.white)
+            .error(R.drawable.bg_login)
+            .into(viewBinding.avatar)
         setupToolbar()
 
         viewBinding.edtBirthday.setOnClickListener {
@@ -104,6 +120,17 @@ class CreateProfileFragment : BaseFragment<FragmentCreateProfileBinding>() , Vie
 
 
     private fun observeViewModel() {
+
+        userViewModel.updateCoverLiveData.observe(this, {
+            it.data?.let { it1 -> CoreApplication.instance.saveAccount(it1) }
+//            currentProfile = CoreApplication.instance.profile
+//            userViewModel.getProfileLiveData.removeObservers(this)
+        })
+        userViewModel.updateImageLiveData.observe(this, {
+            it.data?.let { it1 -> CoreApplication.instance.saveAccount(it1) }
+//            currentProfile = CoreApplication.instance.profile
+//            userViewModel.getProfileLiveData.removeObservers(this)
+        })
         authViewModel.profileLiveData.observe(this, Observer {
             if (it != null) {
                 if (it.status == true) {
@@ -430,10 +457,13 @@ class CreateProfileFragment : BaseFragment<FragmentCreateProfileBinding>() , Vie
                     val url = s3Client.getUrl(BuildConfig.AWS_BUCKET, photoStoragePath)
                     when (photoType) {
                         PhotoType.PROFILE_PHOTO -> {
-                            currentProfile?.account?.photo = "$url"
+                            currentProfile?.account?.avatar = "$url"
+                            updateImage("$url")
+
                         }
                         PhotoType.COVER_PHOTO -> {
                             currentProfile?.account?.cover = "$url"
+                            updateCover("$url")
                         }
                     }
                     //updateProfile()
@@ -446,6 +476,14 @@ class CreateProfileFragment : BaseFragment<FragmentCreateProfileBinding>() , Vie
                 ex.printStackTrace()
             }
         })
+    }
+
+    private fun updateImage(url: String) {
+        userViewModel.updateImage(url)
+    }
+
+    private fun updateCover(url: String) {
+        userViewModel.updateCover(url)
     }
 
 }

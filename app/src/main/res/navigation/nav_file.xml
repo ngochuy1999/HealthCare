@@ -8,4 +8,9 @@
         android:id="@+id/fileFragment"
         android:name="com.ptithcm.healthcare.view.file.FileFragment"
         android:label="FileFragment" />
+    <include app:graph="@navigation/nav_doctor" />
+    <include app:graph="@navigation/nav_medical_record" />
+    <include app:graph="@navigation/nav_health_record" />
+    <include app:graph="@navigation/nav_search" />
+    <include app:graph="@navigation/nav_qrcode" />
 </navigation>

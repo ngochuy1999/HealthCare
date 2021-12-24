@@ -4,6 +4,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ptithcm.core.model.Doctor
 import com.ptithcm.core.model.ProductClothes
 import com.ptithcm.core.model.wish.ObjectResponse
 import com.ptithcm.core.repository.WishListRepository
@@ -11,7 +12,7 @@ import com.ptithcm.core.vo.Result
 import kotlinx.coroutines.launch
 
 class WishListViewModel(val repo: WishListRepository): ViewModel() {
-    val wishListResult = MediatorLiveData<ArrayList<ProductClothes>>()
+    val wishListResult = MediatorLiveData<ArrayList<Doctor>>()
     val addAndRemoveResult = MediatorLiveData<ObjectResponse<Int>>()
     val error = MutableLiveData<Pair<String, Int?>>()
     val networkState = MutableLiveData<Boolean>()
@@ -31,7 +32,7 @@ class WishListViewModel(val repo: WishListRepository): ViewModel() {
                     }
                     is Result.Success -> {
                         networkState.value = false
-                        wishListResult.value = it.data?.data
+                        wishListResult.value = it.data
                     }
                 }
             }
@@ -49,10 +50,10 @@ class WishListViewModel(val repo: WishListRepository): ViewModel() {
                     }
                     is Result.Success -> {
                         if (it.data?.data != 1) {
-                            val arr = ArrayList<ProductClothes>(
+                            val arr = ArrayList<Doctor>(
                                 wishListResult.value?.toMutableList() ?: return@addSource
                             )
-                            arr.removeIf { prod -> prod.id == id }
+                            arr.removeIf { prod -> prod.doctorId == id }
                             wishListResult.value = arr
                         }
                         addAndRemoveResult.value = it.data

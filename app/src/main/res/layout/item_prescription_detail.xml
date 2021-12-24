@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.ptithcm.healthcare.util.DateUtils"/>
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.ptithcm.core.model.Prescription" />
+
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin_8dp"
+        app:cardCornerRadius="@dimen/layout_margin_10dp"
+        app:cardBackgroundColor="@color/gray_stroke"
+        >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/medName"
+            style="@style/normal_text"
+            android:layout_width="match_parent"
+            android:background="#ffdca7"
+            android:padding="5dp"
+            android:text="@{item.medicine.medicineName}"
+            android:textAlignment="textStart"
+            android:textSize="16sp"
+            tools:text="Paracetamol" />
+
+        <TextView
+            android:id="@+id/border"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/medName"
+            android:background="@color/gray_dark" />
+
+        <TextView
+            android:id="@+id/dosage"
+            style="@style/normal_text"
+            android:layout_below="@+id/border"
+            android:padding="5dp"
+            android:text="@string/quantity1"
+            tools:text="@string/quantity1" />
+
+        <TextView
+            android:id="@+id/pillAmount"
+            style="@style/normal_text"
+            android:layout_below="@+id/border"
+            android:layout_toEndOf="@+id/dosage"
+            android:padding="5dp"
+            android:text="@{item.quantity.toString()}"
+            tools:text="5 pills" />
+
+        <TextView
+            android:id="@+id/requirementsHeader"
+            style="@style/normal_text"
+            android:layout_below="@+id/dosage"
+            android:padding="5dp"
+            android:text="@string/dosage"
+            tools:text="@string/dosage" />
+
+        <TextView
+            android:id="@+id/requirementsText"
+            style="@style/normal_text"
+            android:layout_below="@id/dosage"
+            android:layout_toEndOf="@id/requirementsHeader"
+            android:padding="5dp"
+            android:text="@{item.medicine.dosage}"
+            tools:text="With ice cold bear" />
+
+
+    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</layout>

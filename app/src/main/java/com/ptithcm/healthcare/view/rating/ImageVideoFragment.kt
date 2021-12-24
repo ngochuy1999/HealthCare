@@ -7,7 +7,6 @@ import com.ptithcm.healthcare.databinding.FragmentImageVideoBinding
 import com.ptithcm.healthcare.ext.gone
 import com.ptithcm.healthcare.ext.visible
 import com.ptithcm.healthcare.view.MainActivity
-import com.ptithcm.healthcare.view.rating.adapter.ImgVideoPageAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ImageVideoFragment : BaseFragment<FragmentImageVideoBinding>() {
@@ -33,8 +32,6 @@ class ImageVideoFragment : BaseFragment<FragmentImageVideoBinding>() {
     private fun setUpViewpager() {
         val list = arguments?.getStringArrayList("list")
         val pos = arguments?.getInt("pos", 0) ?: 0
-        viewBinding.vpImage.adapter =
-            ImgVideoPageAdapter(childFragmentManager, list ?: arrayListOf())
         viewBinding.vpImage.currentItem = pos
         viewBinding.indicator.setupWithViewPager(viewBinding.vpImage)
     }

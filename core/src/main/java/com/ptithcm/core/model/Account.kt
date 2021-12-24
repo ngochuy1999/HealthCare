@@ -1,5 +1,9 @@
 package com.ptithcm.core.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Account(
     val accountId: Int,
     val active: Int? = null,
@@ -11,5 +15,5 @@ data class Account(
     val role: Role? = null,
     val userName: String?,
     var cover : String? = "",
-    var photo: String? = ""
-)
+    var avatar: String? = ""
+): Parcelable

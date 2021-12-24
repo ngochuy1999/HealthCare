@@ -1,6 +1,7 @@
 package com.ptithcm.core.model
 
 import android.os.Parcelable
+import com.ptithcm.core.data.remote.DynamicSearchAdapter
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -10,4 +11,7 @@ data class Specialize(
     var description: String? = null,
     var active: Int? = null,
     var imageUrl: String? = null
-) : Parcelable
+) : DynamicSearchAdapter.Searchable, Parcelable {
+    override fun getSearchCriteria(): String = name?: ""
+    override fun toString() = name ?: ""
+}

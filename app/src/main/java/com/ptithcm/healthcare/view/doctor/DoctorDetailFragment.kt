@@ -7,16 +7,16 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.ptithcm.core.CoreApplication
 import com.ptithcm.core.model.Doctor
 import com.ptithcm.core.model.MedicalBill
 import com.ptithcm.core.model.ProductClothesDetail
 import com.ptithcm.core.model.RatingProduct
-import com.ptithcm.core.util.ObjectHandler
+import com.ptithcm.core.util.*
 import com.ptithcm.healthcare.R
 import com.ptithcm.healthcare.base.BaseActivity
 import com.ptithcm.healthcare.base.BaseFragment
 import com.ptithcm.healthcare.constant.KEY_ARGUMENT
-import com.ptithcm.healthcare.constant.KEY_DESIGNER
 import com.ptithcm.healthcare.databinding.FragmentDoctorDetailBinding
 import com.ptithcm.healthcare.ext.*
 import com.ptithcm.healthcare.view.MainActivity
@@ -24,7 +24,6 @@ import com.ptithcm.healthcare.view.doctor.adapter.ConsultationRecyclerViewAdapte
 import com.ptithcm.healthcare.viewmodel.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_doctor_detail.*
-import org.jetbrains.anko.support.v4.toast
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DoctorDetailFragment : BaseFragment<FragmentDoctorDetailBinding>() {
@@ -33,58 +32,65 @@ class DoctorDetailFragment : BaseFragment<FragmentDoctorDetailBinding>() {
         get() = R.layout.fragment_doctor_detail
 
     private val wishListViewModel: WishListViewModel by viewModel()
-    private val shoppingViewModel: ShoppingViewModel by viewModel()
+    private val medicalBillViewModel: MedicalBillViewModel by viewModel()
     private val questionsViewModel: QuestionsViewModel by viewModel()
     private val ratingViewModel: RatingViewModel by viewModel()
 
     private lateinit var consultationAdapter: ConsultationRecyclerViewAdapter
     private var doctor: Doctor? = null
+    private var pid: Int? = null
     private var productDetail: ProductClothesDetail? = null
     private val isLogin = ObjectHandler.isLogin()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pid = CoreApplication.instance.account?.accountId
         (arguments?.getParcelable(KEY_ARGUMENT) as? Doctor)?.let {
             doctor = it
-            it.doctorId?.let { it1 -> shoppingViewModel.getAllConsult(it1) }
+            it.doctorId?.let { it1 -> medicalBillViewModel.getAllConsult(it1)
+            medicalBillViewModel.checkIsLike(pid,it1)}
         }
 
         activity?.btnNav?.visibility = View.GONE
         (activity as? BaseActivity<*>)?.isShowLoading(false)
         doctor?.doctorId?.let { questionsViewModel.getQuestionCount(it) }
         doctor?.doctorId?.let { ratingViewModel.getRatingProduct(it) }
+        bindingViewModel()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpToolBar()
+
+    }
 
     override fun bindEvent() {
         viewBinding.fragment = this
+        viewBinding.isNotEmpty = true
         bindProduct()
-        setUpToolBar()
-
         consultationAdapter =
             ConsultationRecyclerViewAdapter(arrayListOf(), this::listenerConsult)
         viewBinding.rvConsult.adapter = consultationAdapter
 
     }
 
-    override fun bindViewModel() {
-//        shoppingViewModel.detailResult.observe(this, Observer {
-//            if (it != null) {
-//                productDetail = it
-//            viewBinding.item = productDetail
-//                setUpToolBar()
-//                bindProduct()
-//            }
-//        })
+    fun bindingViewModel() {
 
-        shoppingViewModel.consultationResult.observe(this, Observer {
+        medicalBillViewModel.isLikeResult.observe(this, Observer {
+            (requireActivity() as? MainActivity)?.apply {
+                viewBinding.layoutToolbar.isLike = it.status
+            }
+        })
+
+        medicalBillViewModel.consultationResult.observe(this, Observer {
             if (it != null) {
+                viewBinding.isNotEmpty = it.size > 0
                 consultationAdapter.setListConsult(it)
             }
         })
         wishListViewModel.addAndRemoveResult.observe(this, Observer {})
 
-        shoppingViewModel.error.observe(this, Observer {
+        medicalBillViewModel.error.observe(this, Observer {
             (requireActivity() as? MainActivity)?.isShowErrorNetwork(true)
         })
 //        ratingViewModel.error.observe(this, Observer {
@@ -162,12 +168,6 @@ class DoctorDetailFragment : BaseFragment<FragmentDoctorDetailBinding>() {
                     }
                 }
             }
-            R.id.tvTitleToolbar -> {
-                navController.navigateAnimation(
-                    R.id.nav_carousel_detail,
-                    bundle = bundleOf(KEY_ARGUMENT to productDetail?.provider, KEY_DESIGNER to true)
-                )
-            }
         }
     }
 
@@ -195,7 +195,7 @@ class DoctorDetailFragment : BaseFragment<FragmentDoctorDetailBinding>() {
                 hasCount = false,
                 isProductPage = true
             )
-            toolbar?.isSelected = true
+            toolbar?.isSelected = false
             setupToolbar(
                 "DOCTOR",
                 isBackPress = false,
@@ -203,7 +203,6 @@ class DoctorDetailFragment : BaseFragment<FragmentDoctorDetailBinding>() {
                     onClick(it)
                 })
             toolbar?.findViewById<AppCompatImageButton>(R.id.ivRight)?.apply {
-                isSelected = doctor?.getIsFavorite() ?: false
                 setImageDrawable(
                     ContextCompat.getDrawable(requireContext(), R.drawable.bg_star_active)
                 )
@@ -212,10 +211,6 @@ class DoctorDetailFragment : BaseFragment<FragmentDoctorDetailBinding>() {
     }
 
     private fun listenerConsult(medicalBill: MedicalBill?) {
-        navController.navigateAnimation(
-            R.id.nav_doctor, bundle =
-            bundleOf(KEY_ARGUMENT to medicalBill)
-        )
     }
 
 }

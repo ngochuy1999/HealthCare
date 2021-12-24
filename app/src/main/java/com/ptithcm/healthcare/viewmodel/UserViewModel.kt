@@ -15,12 +15,20 @@ import com.ptithcm.core.util.INIT_PAGE
 import com.ptithcm.core.util.PAGE_SIZE
 import com.ptithcm.core.vo.ItemViewModel
 import com.ptithcm.core.vo.Result
+import okhttp3.ResponseBody
 import kotlinx.coroutines.launch
 
 class UserViewModel(private val repository: UserRepository) : ViewModel() {
     val updateDetailLiveData = MediatorLiveData<ObjectResponse<Profile>>()
+    val updateImageLiveData = MediatorLiveData<ObjectResponse<Account>>()
+    val updateCoverLiveData = MediatorLiveData<ObjectResponse<Account>>()
     val changePasswordLiveData = MediatorLiveData<ObjectResponse<Account>>()
     val updateAddressBookLiveData = MediatorLiveData<User>()
+
+    val medicalRecordLiveData = MediatorLiveData<ArrayList<MedicalRecord>>()
+    val testResultLiveData = MediatorLiveData<ArrayList<TestResult>>()
+    val treatmentLiveData = MediatorLiveData<TreatmentRegiment>()
+    val infoAppLiveData = MediatorLiveData<Info>()
 
     val allAddressLiveData = MediatorLiveData<ArrayList<ShoppingAddress>>()
     val updateAddressResultLiveData = MediatorLiveData<String>()
@@ -28,6 +36,7 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     val getProfileLiveData = MediatorLiveData<User>()
     val error = MutableLiveData<Pair<String, Int?>>()
     val isLoading = MutableLiveData<Boolean>()
+
 
     fun updateProfile(param: EditAccountParam) {
         viewModelScope.launch {
@@ -41,6 +50,44 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
                     }
                     is Result.Success -> {
                         updateDetailLiveData.value = it.data
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun updateImage(url: String) {
+        viewModelScope.launch {
+            updateImageLiveData.addSource(repository.updateImage(url)) {
+                when (it) {
+                    Result.Loading -> {
+                        isLoading.value = true
+                    }
+                    is Result.Error -> {
+                        error.value = Pair(it.message, it.code)
+                    }
+                    is Result.Success -> {
+                        updateImageLiveData.value = it.data
+                    }
+                }
+            }
+        }
+
+    }
+
+    fun updateCover(url: String) {
+        viewModelScope.launch {
+            updateCoverLiveData.addSource(repository.updateCover(url)) {
+                when (it) {
+                    Result.Loading -> {
+                        isLoading.value = true
+                    }
+                    is Result.Error -> {
+                        error.value = Pair(it.message, it.code)
+                    }
+                    is Result.Success -> {
+                        updateCoverLiveData.value = it.data
                     }
                 }
             }
@@ -103,6 +150,25 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
         }
     }
 
+    fun getMedicalRecord(pid: Int?) {
+        viewModelScope.launch {
+            medicalRecordLiveData.addSource(repository.getMedicalRecord(pid)) {
+                when (it) {
+                    is Result.Loading ->{
+                        networkState.value = true
+                    }
+                    is Result.Error -> {
+                        networkState.value = false
+                        error.value = Pair(it.message, it.code)
+                    }
+                    is Result.Success -> {
+                        networkState.value = false
+                        medicalRecordLiveData.value = it.data
+                    }
+                }
+            }
+        }
+    }
     fun getAllAddress() {
         viewModelScope.launch {
             allAddressLiveData.addSource(repository.getAllAddress()) {
@@ -114,52 +180,6 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
                     is Result.Success -> {
                         isLoading.value = false
                         allAddressLiveData.value = it.data
-                    }
-                }
-            }
-        }
-    }
-
-    fun addAddress(param: ShoppingAddress) {
-        viewModelScope.launch {
-            updateAddressResultLiveData.addSource(repository.addAddress(param)) {
-                when (it) {
-                    is Result.Error -> {
-                        error.value = Pair(it.message, it.code)
-                    }
-                    is Result.Success -> {
-                        updateAddressResultLiveData.value = it.data?.message
-                    }
-                }
-            }
-        }
-    }
-
-    fun updateAddress(param: ShoppingAddress?) {
-        param ?: return
-        viewModelScope.launch {
-            updateAddressResultLiveData.addSource(repository.updateAddress(param)) {
-                when (it) {
-                    is Result.Error -> {
-                        error.value = Pair(it.message, it.code)
-                    }
-                    is Result.Success -> {
-                        updateAddressResultLiveData.value = it.data?.message
-                    }
-                }
-            }
-        }
-    }
-
-    fun deleteAddress(addressId: Int?) {
-        viewModelScope.launch {
-            updateAddressResultLiveData.addSource(repository.deleteAddress(addressId)) {
-                when (it) {
-                    is Result.Error -> {
-                        error.value = Pair(it.message, it.code)
-                    }
-                    is Result.Success -> {
-                        updateAddressResultLiveData.value = it.data?.message
                     }
                 }
             }
@@ -209,6 +229,66 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
                     }
                     is Result.Success -> {
                         invoiceDetailLiveData.value = it.data?.data
+                    }
+                }
+            }
+        }
+    }
+
+    fun getTestResult(accountId: Int?) {
+        viewModelScope.launch {
+            testResultLiveData.addSource(repository.getTestResult(accountId)) {
+                when (it) {
+                    is Result.Loading ->{
+                        networkState.value = true
+                    }
+                    is Result.Error -> {
+                        networkState.value = false
+                        error.value = Pair(it.message, it.code)
+                    }
+                    is Result.Success -> {
+                        networkState.value = false
+                        testResultLiveData.value = it.data
+                    }
+                }
+            }
+        }
+    }
+
+    fun getTreatmentRegiment(recordId: Int?) {
+        viewModelScope.launch {
+            treatmentLiveData.addSource(repository.getTreatmentRegiment(recordId)) {
+                when (it) {
+                    is Result.Loading ->{
+                        networkState.value = true
+                    }
+                    is Result.Error -> {
+                        networkState.value = false
+                        error.value = Pair(it.message, it.code)
+                    }
+                    is Result.Success -> {
+                        networkState.value = false
+                        treatmentLiveData.value = it.data
+                    }
+                }
+            }
+        }
+    }
+
+    fun getAppInfo() {
+        viewModelScope.launch {
+            infoAppLiveData.addSource(repository.getAppInfo()) {
+                when (it) {
+                    is Result.Loading ->{
+                        networkState.value = true
+                    }
+                    is Result.Error -> {
+                        networkState.value = false
+                        error.value = Pair(it.message, it.code)
+                    }
+                    is Result.Success -> {
+                        networkState.value = false
+                        infoAppLiveData.value = it.data
                     }
                 }
             }

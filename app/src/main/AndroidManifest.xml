@@ -50,7 +50,7 @@
             android:name="com.ptithcm.healthcare.view.profile.ProfileCropImageActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-
+   
         <activity
             android:name="com.ptithcm.healthcare.view.uploadproduct.UploadProductActivity"
             android:screenOrientation="portrait"
@@ -98,7 +98,7 @@
             android:enabled="true" />
 
         <service
-            android:name="com.ptithcm.healthcare.FirebaseNotificationService"
+            android:name="com.ptithcm.healthcare.firebaseservice.FirebaseNotificationService"
             android:exported="false"
             android:directBootAware="true">
             <intent-filter>

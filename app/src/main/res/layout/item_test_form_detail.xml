@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.ptithcm.healthcare.util.DateUtils"/>
+        <import type="android.view.View" />
+
+        <variable
+            name="item"
+            type="com.ptithcm.core.model.TestFormDetail" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_margin_16dp"
+        android:paddingEnd="@dimen/layout_margin_16dp"
+        android:background="@color/white"
+        android:paddingTop="@dimen/layout_margin_8dp">
+
+        <View
+            android:id="@+id/view2"
+            style="@style/divider"
+            android:layout_height="0.6dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTittleVendor"
+            style="@style/normal_text.grey"
+            android:layout_width="@dimen/no_padding"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/test_name"
+            android:textAlignment="viewStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            style="@style/normal_text"
+            android:layout_marginStart="12dp"
+            android:text="@{item.subclinical.testName}"
+            app:layout_constraintStart_toEndOf="@+id/tvTittleVendor"
+            app:layout_constraintTop_toTopOf="@+id/tvTittleVendor"
+            tools:text="snapprodtest02" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleColor"
+            style="@style/normal_text.grey"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:text="@string/assignTime"
+            app:layout_constraintStart_toStartOf="@id/tvTittleVendor"
+            app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvColorName"
+            style="@style/normal_text"
+            android:layout_width="wrap_content"
+            android:text="@{DateUtils.convertFormat(item.assignTime, DateUtils.DATE_FORMAT_SERVER, DateUtils.DEPARTURE_TIME_FORMAT)}"
+            android:textAlignment="textStart"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
+            app:layout_constraintTop_toTopOf="@+id/tvTitleColor"
+            tools:text="black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleNote"
+            style="@style/normal_text.grey"
+            android:layout_width="84dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:text="@string/note"
+            app:layout_constraintStart_toStartOf="@+id/tvTitleColor"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleColor" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNote"
+            style="@style/normal_text"
+            android:layout_width="wrap_content"
+            android:text="@{item.note}"
+            android:textAlignment="textStart"
+            android:layout_marginTop="@dimen/size_8dp"
+            app:layout_constraintStart_toStartOf="@+id/tvColorName"
+            app:layout_constraintTop_toBottomOf="@+id/tvColorName"
+            tools:text="note" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitlePrice"
+            style="@style/normal_text.grey"
+            android:layout_width="84dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:text="@string/price"
+            app:layout_constraintStart_toStartOf="@+id/tvTitleNote"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleNote" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            style="@style/normal_text.bold"
+            android:textColor="@color/colorTextDiscount"
+            txtPrice="@{item.subclinical.price}"
+            android:textAlignment="textStart"
+            android:layout_marginTop="@dimen/size_8dp"
+            app:layout_constraintStart_toStartOf="@+id/tvNote"
+            app:layout_constraintTop_toBottomOf="@+id/tvNote"
+            tools:text="6.66" />
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/bOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="tvTitleColor,tvTittleVendor,tvTitleNote,tvTitlePrice"
+            tools:layout_editor_absoluteX="170dp"
+            tools:layout_editor_absoluteY="8dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.ptithcm.healthcare.util.DateUtils"/>
+
+        <variable
+            name="medicalBill"
+            type="com.ptithcm.core.model.MedicalBill" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/shippingAddressContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/layout_margin_8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shippingAddressText"
+            style="@style/normal_text.bold"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:text="@string/medical_info"
+            android:textAlignment="viewStart"
+            android:textAllCaps="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="tvTitleName, tvTitlePhone, tvTitleAddress, tvTitleNameMedical" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleName"
+            style="@style/normal_text.grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_12dp"
+            android:layout_marginTop="@dimen/layout_margin_12dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="BILLID:"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/shippingAddressText" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            style="@style/normal_text"
+            android:text="@{medicalBill.billId.toString()}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:layout_marginEnd="@dimen/layout_margin_8dp"
+            android:maxLines="1"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvTitleName"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text="8888888" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleNameMedical"
+            style="@style/normal_text.grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/name_medical"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="@id/tvTitleName"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvNameMedical"
+            style="@style/normal_text"
+            android:text="@{medicalBill.doctor.speciality.description}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:layout_marginEnd="@dimen/layout_margin_12dp"
+            android:maxLines="1"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvTitleNameMedical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text="Khám tổng quát" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitlePhone"
+            style="@style/normal_text.grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/status"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="@id/tvTitleNameMedical"
+            app:layout_constraintTop_toBottomOf="@id/tvTitleNameMedical" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPhone"
+            style="@style/normal_text"
+            android:text="@{medicalBill.medicalBillStatus.statusName}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:layout_marginEnd="@dimen/layout_margin_12dp"
+            android:maxLines="1"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvTitlePhone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text="Đang khám" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleAddress"
+            style="@style/normal_text.grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/date"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="@id/tvTitleName"
+            app:layout_constraintTop_toBottomOf="@id/tvTitlePhone" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddress"
+            style="@style/normal_text"
+            android:text="@{DateUtils.convertFormat(medicalBill.date, DateUtils.DATE_FORMAT_SERVER, DateUtils.DEPARTURE_TIME_FORMAT)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:layout_marginEnd="@dimen/layout_margin_12dp"
+            android:lineSpacingExtra="2dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvTitleAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text="22-01-1999" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -8,6 +8,10 @@
         <import type="android.view.View" />
 
         <variable
+            name="isNotEmpty"
+            type="Boolean" />
+
+        <variable
             name="item"
             type="com.ptithcm.core.model.Doctor" />
 
@@ -114,7 +118,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/lnExperience"
-                    android:layout_width="110dp"
+                    android:layout_width="120dp"
                     android:layout_height="110dp"
                     android:layout_marginTop="16dp"
                     android:background="@drawable/bg_corner_white"
@@ -125,7 +129,6 @@
                         android:id="@+id/tv"
                         style="@style/normal_text.grey"
                         android:text="@string/experience"
-                        android:textColor="#757575"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -145,7 +148,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/lnTime"
-                    android:layout_width="110dp"
+                    android:layout_width="120dp"
                     android:layout_height="110dp"
                     android:background="@drawable/bg_corner_white"
                     android:orientation="vertical"
@@ -169,7 +172,6 @@
                         style="@style/normal_text.grey"
                         android:textAlignment="center"
                         android:text="@string/time_advise"
-                        android:textColor="#757575"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -178,7 +180,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/lnFavorite"
-                    android:layout_width="110dp"
+                    android:layout_width="120dp"
                     android:layout_height="110dp"
                     android:background="@drawable/bg_corner_white"
                     android:orientation="vertical"
@@ -189,7 +191,6 @@
                         android:id="@+id/tv_favorite1"
                         style="@style/normal_text.grey"
                         android:text="@string/favorite"
-                        android:textColor="#757575"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -258,15 +259,62 @@
                         android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@+id/layout_desDoctor"
                         tool:layout_editor_absoluteX="16dp">
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rv_consult"
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:nestedScrollingEnabled="false"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/bg_corner_white"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            tool:itemCount="3" />
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/layout_l2">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/ivEmpty"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                app:layout_constraintBottom_toTopOf="@id/tvEmptyWishList"
+                                app:layout_constraintEnd_toEndOf="@id/tvEmptyWishList"
+                                app:layout_constraintHeight_percent="0.2"
+                                app:layout_constraintStart_toStartOf="@id/tvEmptyWishList"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.3"
+                                app:srcCompat="@drawable/document" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tvEmptyWishList"
+                                style="@style/normal_text"
+                                android:layout_marginTop="20dp"
+                                android:text="@string/empty_consult"
+                                android:textSize="@dimen/text_size_20sp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="1.0" />
+
+                            <androidx.constraintlayout.widget.Group
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:visibility="@{isNotEmpty ? View.GONE : View.VISIBLE}"
+                                app:constraint_referenced_ids="tvEmptyWishList,ivEmpty" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rv_consult"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:nestedScrollingEnabled="false"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:spanCount="2"
+                                tool:itemCount="3" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <View

@@ -49,25 +49,31 @@
         </com.google.android.material.appbar.AppBarLayout>
 
 
-    <com.dinuscxj.refresh.RecyclerRefreshLayout
-        android:id="@+id/swipeRf"
-        setVisible="@{size > 0}"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        tools:layout_editor_absoluteX="0dp">
+        <com.dinuscxj.refresh.RecyclerRefreshLayout
+            android:id="@+id/swipeRf"
+            setVisible="@{size > 0}"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_consult"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:background="@color/bg_color_in_white"
+                android:clipToPadding="false"
                 android:orientation="vertical"
+                android:paddingBottom="@dimen/layout_margin_28dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="3"
                 tools:listitem="@layout/item_medical_bill" />
 
-    </com.dinuscxj.refresh.RecyclerRefreshLayout>
+        </com.dinuscxj.refresh.RecyclerRefreshLayout>
 
         <include
             android:id="@+id/layoutEmpty"
@@ -75,6 +81,7 @@
             setVisible="@{size == 0}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appBarLayout"
             tools:visibility="gone" />

@@ -306,20 +306,10 @@ class CreateReviewFragment : BaseFragment<FragmentCreateReviewBinding>() {
     private fun showImageDetail(pos: Int) {
         when (pos) {
             1, 2 -> {
-                navController.navigate(
-                    R.id.imageZoomFragment,
-                    bundleOf(
-                        "uri" to if (pos == 1) uri1 else uri2
-                    )
-                )
+
             }
             3 -> {
-                navController.navigate(
-                    R.id.videoFragment,
-                    bundleOf(
-                        "uri" to uriVideo
-                    )
-                )
+
             }
         }
     }

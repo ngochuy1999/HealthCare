@@ -2,7 +2,6 @@ package com.ptithcm.healthcare.view.qrcode
 
 import android.Manifest
 import android.os.Bundle
-import android.widget.Toast
 import com.ptithcm.healthcare.R
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,29 +9,20 @@ import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.provider.Settings
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.ptithcm.core.CoreApplication
-import com.ptithcm.core.param.LogInParam
 import com.ptithcm.core.param.MedicalBillParam
-import com.ptithcm.core.util.deviceHasPasswordPinLock
-import com.ptithcm.core.util.isBiometricHardWareAvailable
 import com.ptithcm.healthcare.base.BaseFragment
-import com.ptithcm.healthcare.constant.*
 import com.ptithcm.healthcare.databinding.FragmentQrcodeBinding
 import com.ptithcm.healthcare.ext.*
 import com.ptithcm.healthcare.view.MainActivity
-import com.ptithcm.healthcare.viewmodel.ShoppingViewModel
+import com.ptithcm.healthcare.viewmodel.MedicalBillViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_qrcode.view.*
 import me.dm7.barcodescanner.zbar.Result
 import me.dm7.barcodescanner.zbar.ZBarScannerView
 import org.jetbrains.anko.support.v4.toast
@@ -51,7 +41,7 @@ class QRCodeFragment : BaseFragment<FragmentQrcodeBinding>(), ZBarScannerView.Re
         }
     }
 
-    private  val viewModel : ShoppingViewModel by viewModel()
+    private  val viewModel : MedicalBillViewModel by viewModel()
 
     lateinit var scannerView: ZBarScannerView
 
@@ -176,8 +166,6 @@ class QRCodeFragment : BaseFragment<FragmentQrcodeBinding>(), ZBarScannerView.Re
                     it
                 )
             }?.let { viewModel.addMedicalBill(it) }
-            toast(contents)
-
         }
         //scannerView.resumeCameraPreview(this)
     }

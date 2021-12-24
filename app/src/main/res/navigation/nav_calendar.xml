@@ -12,10 +12,21 @@
     </fragment>
 
 
-    <include app:graph="@navigation/nav_shopping_card" />
-
     <include app:graph="@navigation/nav_search" />
 
     <include app:graph="@navigation/nav_product" />
+    <fragment
+        android:id="@+id/mediacalBillDetailFragment"
+        android:name="com.ptithcm.healthcare.view.medicaldetail.MedicalBillDetailFragment"
+        android:label="MediacalBillDetailFragment" />
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.ptithcm.healthcare.view.card.CheckoutFragment"
+        android:label="CheckoutFragment" />
+    <fragment
+        android:id="@+id/creditCardDetailFragment"
+        android:name="com.ptithcm.healthcare.view.payment.CreditCardDetailFragment"
+        android:label="CreditCardDetailFragment" />
+    <include app:graph="@navigation/nav_qrcode" />
 
 </navigation>

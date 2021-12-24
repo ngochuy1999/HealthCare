@@ -28,7 +28,7 @@
             android:layout_width="0dp"
             android:layout_marginTop="@dimen/layout_margin_8dp"
             android:layout_marginStart="@dimen/layout_margin_8dp"
-            android:text="@string/shipping_address"
+            android:text="@string/doctor_info"
             android:textAlignment="viewStart"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,8 +144,8 @@
             tools:text="0123456789" />
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="5dp"
+            android:layout_height="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

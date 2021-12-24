@@ -12,12 +12,19 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.ptithcm.core.model.Color
+import com.ptithcm.core.model.Prescription
 import com.ptithcm.core.model.PromotionType
+import com.ptithcm.core.model.TestFormDetail
 import com.ptithcm.core.util.PriceFormat
 import com.ptithcm.healthcare.R
 import com.ptithcm.healthcare.ext.roundPrice
+import com.ptithcm.healthcare.view.medicaldetail.adapter.TestFormDetailAdapter
+import com.ptithcm.healthcare.view.medicalrecord.adapter.PrescriptionDetailAdapter
+import java.text.NumberFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 object BindingAdapterText {
 
@@ -49,6 +56,55 @@ object BindingAdapterText {
     }
 
     @JvmStatic
+    @BindingAdapter(value = ["setTestFormDetail"])
+    fun RecyclerView.setTestFormDetail(testFormDetail: ArrayList<TestFormDetail>?) {
+        if (testFormDetail != null) {
+            val testFormDetailAdapter = TestFormDetailAdapter()
+            testFormDetailAdapter.addToList(testFormDetail)
+
+            adapter = testFormDetailAdapter
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["setPrescription"])
+    fun RecyclerView.setPrescription(prescription: ArrayList<Prescription>?) {
+        if (prescription != null) {
+            val prescriptionDetailAdapter = PrescriptionDetailAdapter()
+            prescriptionDetailAdapter.addToList(prescription)
+
+            adapter = prescriptionDetailAdapter
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("txtPriceDiscount")
+    fun bindPriceDiscount(view: AppCompatTextView, price: Long?) {
+        val localeUS = Locale.US
+        val currencyUS = NumberFormat.getCurrencyInstance(localeUS)
+        view.text = currencyUS.format(price?:0)
+        //view.paintFlags = view.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    }
+
+    @JvmStatic
+    @BindingAdapter("txtPrice")
+    fun bindPrice(view: AppCompatTextView, price: Int) {
+        val localeUS = Locale.US
+        val currencyUS = NumberFormat.getCurrencyInstance(localeUS)
+        view.text = currencyUS.format(price?:0)
+        //view.paintFlags = view.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    }
+
+    @JvmStatic
+    @BindingAdapter("txtSubPrice")
+    fun bindSubPrice(view: AppCompatTextView, price: Double) {
+        val localeUS = Locale.US
+        val currencyUS = NumberFormat.getCurrencyInstance(localeUS)
+        view.text = currencyUS.format(price?:0)
+        //view.paintFlags = view.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+    }
+
+    @JvmStatic
     @BindingAdapter("price", "promo", "promoType", requireAll = false)
     fun setTextPrice(
         textView: AppCompatTextView,
@@ -76,6 +132,7 @@ object BindingAdapterText {
                 }
         }
     }
+
 
     @JvmStatic
     @BindingAdapter("android:layout_marginStart")

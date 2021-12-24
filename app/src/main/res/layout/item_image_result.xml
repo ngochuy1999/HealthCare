@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_margin_16dp"
+        android:paddingEnd="@dimen/layout_margin_16dp"
+        android:background="@drawable/bg_corner_white"
+        android:paddingTop="@dimen/layout_margin_8dp"
+        android:layout_marginTop="@dimen/layout_margin_12dp">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_result"
+            style="@style/normal_text.grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_12dp"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:layout_marginEnd="@dimen/layout_margin_8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textAlignment="textStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="kết quả"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

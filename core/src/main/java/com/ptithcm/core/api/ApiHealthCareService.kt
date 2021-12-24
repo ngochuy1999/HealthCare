@@ -39,16 +39,34 @@ interface ApiHealthCareService {
     @PUT("/api/changeInfo")
     suspend fun updateProfile(@Body param: EditAccountParam): Response<ObjectResponse<Profile>>
 
+    @PUT("/api/avatar")
+    suspend fun updateImage(@Query("url") url: String,
+                            @Query("id") accountId: Int? = CoreApplication.instance.account?.accountId
+    ): Response<ObjectResponse<Account>>
 
+    @PUT("/api/cover")
+    suspend fun updateCover(@Query("url") url: String,
+                            @Query("id") accountId: Int? = CoreApplication.instance.account?.accountId
+    ): Response<ObjectResponse<Account>>
     /*-----------------------------*/
     /* Specialize */
-    @GET("/api/listSpeciality")
-    suspend fun getListSpecialize(): Response<ArrayList<Specialize>>
+    @GET("/api/topSpeciality")
+    suspend fun getTopSpecialize(): Response<ArrayList<Specialize>>
+
+    @GET("/api/allSpeciality")
+    suspend fun getAllSpecialize(): Response<ArrayList<Specialize>>
 
     /*-----------------------------*/
     /* List Doctor */
-    @GET("/api/listDoctor")
-    suspend fun getListDoctor(): Response<ArrayList<Doctor>>
+    @GET("/api/topDoctor")
+    suspend fun getTopDoctor(): Response<ArrayList<Doctor>>
+
+    @GET("/api/allDoctor")
+    suspend fun getAllDoctor(): Response<ArrayList<Doctor>>
+
+    @GET("/api/doctor_specialize")
+    suspend fun getDoctorBySpecialize(@Query("specialId") specialId: Int): Response<ArrayList<Doctor>>
+
 
     /*-----------------------------*/
     /* Product*/
@@ -75,12 +93,11 @@ interface ApiHealthCareService {
     ): Response<ListResponse<ProductClothes>>
 
     /*-----------------------------*/
-    /* Wish Product*/
-    @GET("/api/favoriteProducts")
+    /* Favorite Doctor*/
+    @GET("/api/favoriteDoctor")
     suspend fun getAllWishList(
-        @Query("pageSize") pageSize: Int? = 100,
         @Query("accountId") accountId: Int? = CoreApplication.instance.account?.accountId
-    ): Response<ObjectResponse<ArrayList<ProductClothes>>>
+    ): Response<ArrayList<Doctor>>
 
     @PUT("/api/checkFavoriteProduct")
     suspend fun addAndRemoveToWishList(
@@ -126,7 +143,7 @@ interface ApiHealthCareService {
     @GET("/api/invoice-detail")
     suspend fun getInvoiceDetail(@Query("invoicecId") invoiceId: Int?): Response<ObjectResponse<InvoiceDetail>>
 
-    @POST("/api/addInvoice")
+    @POST("/api/charge")
     suspend fun requestCheckout(@Body param: RequestCheckoutParam): Response<ObjectResponse<Any>>
 
 
@@ -143,6 +160,13 @@ interface ApiHealthCareService {
     /* Consult Patient*/
     @GET("/api/consultation-patient")
     suspend fun getAllConsultPatient(@Query("PID") PID: Int?): Response<ArrayList<MedicalBill>>
+
+
+    /*-----------------------------*/
+    /* Test Form */
+    @GET("/api/test-form")
+    suspend fun getTestForm(@Query("billId") billId: Int?): Response<ArrayList<TestForm>>
+
 
     /*-----------------------------*/
     /* Question*/
@@ -217,6 +241,35 @@ interface ApiHealthCareService {
 
     @GET("/api/getShopInfo")
     suspend fun getShopInfo(): Response<ObjectResponse<ShopInfo>>
+
+    @GET("/api/isLike")
+    suspend fun chekIsLike(@Query("pid") pid: Int?,
+                           @Query("doctorId") doctorId: Int): Response<ObjectResponse<Boolean>>
+
+    @GET("/api/medical-record")
+    suspend fun getMedicalRecord(@Query("pid") pid: Int?): Response<ArrayList<MedicalRecord>>
+
+    @GET("/api/test-result")
+    suspend fun getTestResult(@Query("pid") accountId: Int?): Response<ArrayList<TestResult>>
+
+    @GET("/api/treatment-regiment")
+    suspend fun getTreatmentRegiment(@Query("medicalRecordId") recordId: Int?): Response<TreatmentRegiment>
+
+    @GET("/api/notification")
+    suspend fun getNotification(@Query("pid")accountId: Int?): Response<ArrayList<Notification>>
+
+    @GET("/api/clinic")
+    suspend fun getClinic(): Response<ArrayList<Clinic>>
+
+    @GET("/api/info")
+    suspend fun getVersionApp(): Response<Info>
+
+    @PUT("/api/cancel")
+    suspend fun cancelBill(@Query("medicalId")billId: Int?): Response<ObjectResponse<Any>>
+
+    @GET("/api/test-result_detail")
+    suspend fun getResultDetail(@Query("resultId") resultId: Int?): Response<ArrayList<TestResultDetail>>
+
 
 }
 

@@ -41,22 +41,22 @@ android {
 
     productFlavors{
         staging{
-            buildConfigField "String", "SERVER_HEALTHCARE_URL", '"http://192.168.1.7:8080/"'
-            buildConfigField "String", "SERVER_URL", '"https://api-staging.snapshop.com"'
+            buildConfigField "String", "SERVER_HEALTHCARE_URL", '"http://192.168.43.158:8080/"'
+            buildConfigField "String", "SERVER_URL", '"https://api.snapshop.me"'
             buildConfigField "String", "IMG_URL", '"file://"'
             buildConfigField "String", "AWS_URL_IMAGE", '"https://snapshop-staging.s3.amazonaws.com/"'
             buildConfigField "String", "AWS_BUCKET", '"snapshop-staging"'
             buildConfigField "String", "IDENTITY_POOL_ID", '"eu-west-1:117ec97f-e345-46dc-a919-afa8bded04fd"'
-            buildConfigField "String", "PUBLISHABLE_KEY", '"pk_test_51HEO9yAUHa3z0jaSN65DnD7ZtQW0uSgoIcQ4J86ee3BPB8TkMuB8cI2pmJnW4i85yPgDqVWjrkHy8WCIBwXy9iGB00viqPHgKx"'
+            buildConfigField "String", "PUBLISHABLE_KEY", '"pk_test_51K56icI299OD7Pv74WCbYk1YI2GFNgrJwdvn5jkQ0yc7srdXiVzNz1aa0LODNlfV1wh55yKDiyUCoeMYWyS8xVv9006CJB4Yw6"'
         }
 
         prod{
-            buildConfigField "String", "SERVER_HEALTHCARE_URL", '"http://192.168.1.7:8080/"'
+            buildConfigField "String", "SERVER_HEALTHCARE_URL", '"http://192.168.43.158:8080/"'
             buildConfigField "String", "SERVER_URL", '"https://api.snapshop.me"'
             buildConfigField "String", "AWS_URL_IMAGE", '"https://snapshop-prod.s3.amazonaws.com/"'
             buildConfigField "String", "AWS_BUCKET", '"snapshop-prod"'
             buildConfigField "String", "IDENTITY_POOL_ID", '"eu-west-1:61e3de32-80c6-4981-bce5-a5a021db70b5"'
-            buildConfigField "String", "PUBLISHABLE_KEY", '"pk_live_i1zLnfVCs8lLvZlsym7NWVk6"'
+            buildConfigField "String", "PUBLISHABLE_KEY", '"pk_test_51K56icI299OD7Pv74WCbYk1YI2GFNgrJwdvn5jkQ0yc7srdXiVzNz1aa0LODNlfV1wh55yKDiyUCoeMYWyS8xVv9006CJB4Yw6"'
         }
     }
 }

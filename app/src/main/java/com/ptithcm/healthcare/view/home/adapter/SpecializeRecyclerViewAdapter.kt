@@ -7,23 +7,45 @@ import androidx.core.view.marginRight
 import androidx.core.view.marginStart
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ptithcm.core.data.remote.DynamicSearchAdapter
+import com.ptithcm.core.model.Doctor
 import com.ptithcm.core.model.Specialize
 import com.ptithcm.healthcare.R
 import com.ptithcm.healthcare.databinding.ItemsSpecializeBinding
 import org.jetbrains.anko.windowManager
 
 class SpecializeRecyclerViewAdapter(
-    private var specialize: ArrayList<Specialize>?,
+    private var specialize: MutableList<Specialize> = arrayListOf(),
     private val listener : (specialize : Specialize?) -> Unit
-) : RecyclerView.Adapter<SpecializeRecyclerViewAdapter.SpecializeViewHolder>() {
+) : DynamicSearchAdapter<Specialize>(specialize) {
 
 
     fun setSpecialize(specialize: ArrayList<Specialize>) {
-        this.specialize = specialize
-        notifyDataSetChanged()
+        this.specialize.apply {
+            clear()
+            addAll(specialize)
+            updateData(specialize)
+            notifyDataSetChanged()
+
+        }
     }
 
-    fun getSpecialize() : ArrayList<Specialize>? = this.specialize
+    fun addDataSearch(arr: MutableList<Specialize>) {
+        this.specialize.apply {
+            clear()
+            addAll(arr)
+            notifyDataSetChanged()
+        }
+    }
+
+    fun removeAllData() {
+        this.specialize.apply {
+            clear()
+            notifyDataSetChanged()
+        }
+    }
+
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecializeViewHolder {
@@ -31,16 +53,8 @@ class SpecializeRecyclerViewAdapter(
         return SpecializeViewHolder(dataBinding)
     }
 
-    override fun onBindViewHolder(holder: SpecializeViewHolder, position: Int) {
 
-                val specialize = specialize?.get(position)
-                (holder as? SpecializeViewHolder)?.bind(specialize)
-                holder.itemView.setOnClickListener {
-                    listener.invoke(specialize)
-                }
-    }
-
-    override fun getItemCount(): Int = specialize?.size ?: 0
+    override fun getItemCount(): Int = specialize.size
 
 
     inner class SpecializeViewHolder(private val viewBinding: ItemsSpecializeBinding) :
@@ -56,4 +70,11 @@ class SpecializeRecyclerViewAdapter(
         }
     }
 
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val specialize = specialize.get(position)
+        (holder as? SpecializeViewHolder)?.bind(specialize)
+        holder.itemView.setOnClickListener {
+            listener.invoke(specialize)
+        }
+    }
 }

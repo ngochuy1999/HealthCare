@@ -21,13 +21,9 @@ import com.ptithcm.healthcare.constant.KEY_DESIGNER
 import com.ptithcm.healthcare.databinding.FragmentProductDetailBinding
 import com.ptithcm.healthcare.ext.*
 import com.ptithcm.healthcare.view.MainActivity
-import com.ptithcm.healthcare.view.doctor.adapter.ConsultationRecyclerViewAdapter
-import com.ptithcm.healthcare.view.home.adapter.DoctorRecyclerViewAdapter
-import com.ptithcm.healthcare.view.wishlist.ColorSpinnerAdapter
-import com.ptithcm.healthcare.view.wishlist.overview.ProductionClothesBannersPagerAdapter
 import com.ptithcm.healthcare.viewmodel.QuestionsViewModel
 import com.ptithcm.healthcare.viewmodel.RatingViewModel
-import com.ptithcm.healthcare.viewmodel.ShoppingViewModel
+import com.ptithcm.healthcare.viewmodel.MedicalBillViewModel
 import com.ptithcm.healthcare.viewmodel.WishListViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,7 +35,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         get() = R.layout.fragment_product_detail
 
     private val wishListViewModel: WishListViewModel by viewModel()
-    private val shoppingViewModel: ShoppingViewModel by viewModel()
+    private val medicalBillViewModel: MedicalBillViewModel by viewModel()
     private val questionsViewModel: QuestionsViewModel by viewModel()
     private val ratingViewModel: RatingViewModel by viewModel()
 
@@ -52,11 +48,11 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         super.onCreate(savedInstanceState)
         (arguments?.getParcelable(KEY_ARGUMENT) as? ProductClothes)?.let {
             product = it
-            shoppingViewModel.getProdDetail(it.id)
+            medicalBillViewModel.getProdDetail(it.id)
         }
         val productId = (arguments?.getInt("productId") as? Int)
         if (productId != null) {
-            shoppingViewModel.getProdDetail(productId)
+            medicalBillViewModel.getProdDetail(productId)
         }
         activity?.btnNav?.visibility = View.GONE
         (activity as? BaseActivity<*>)?.isShowLoading(false)
@@ -83,7 +79,7 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
     }
 
     override fun bindViewModel() {
-        shoppingViewModel.detailResult.observe(this, Observer {
+        medicalBillViewModel.detailResult.observe(this, Observer {
             if (it != null) {
                 productDetail = it
 //            viewBinding.item = productDetail
@@ -94,11 +90,11 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
         })
         wishListViewModel.addAndRemoveResult.observe(this, Observer {})
 
-        shoppingViewModel.isLoading.observe(this, Observer {
+        medicalBillViewModel.isLoading.observe(this, Observer {
             viewBinding.btnAddToCard.isLoading = it
         })
 
-        shoppingViewModel.error.observe(this, Observer {
+        medicalBillViewModel.error.observe(this, Observer {
             (requireActivity() as? MainActivity)?.isShowErrorNetwork(true)
         })
         ratingViewModel.error.observe(this, Observer {
@@ -209,18 +205,6 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 
     private fun setUpViewPager() {
         productDetail?.let {
-            viewBinding.vpImage.adapter = ProductionClothesBannersPagerAdapter(
-                childFragmentManager,
-                it.images ?: arrayListOf()
-            ) { list, pos ->
-                navController.navigateAnimation(
-                    R.id.fragment_over_view,
-                    bundle = bundleOf(
-                        "list" to list,
-                        "pos" to pos
-                    )
-                )
-            }
 
             viewBinding.vpImage.offscreenPageLimit = it.images?.size ?: 0
 
@@ -267,12 +251,6 @@ class ProductDetailFragment : BaseFragment<FragmentProductDetailBinding>() {
 
         viewBinding.btnColor.apply {
             viewBinding.btnColorVisible = !colorOptions.isNullOrEmpty()
-
-            adapter = ColorSpinnerAdapter(
-                context,
-                R.layout.item_color,
-                colorOptions
-            )
 
             onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 var iCurrentSelection = viewBinding.btnColor.selectedItemPosition

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="isPay"
+            type="Boolean" />
+
+        <variable
+            name="item"
+            type="com.ptithcm.core.model.TestForm" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/layout_margin_16dp"
+        android:paddingEnd="@dimen/layout_margin_16dp"
+        android:background="@color/white"
+        android:paddingTop="@dimen/layout_margin_8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvVendor"
+            style="@style/normal_text.SemiBold"
+            android:layout_width="@dimen/no_padding"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/test_form_id"
+            android:textAlignment="viewStart"
+            android:textAllCaps="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTittle"
+            style="@style/normal_text.grey"
+            android:layout_marginStart="12dp"
+            android:text="@{item.id.toString()}"
+            app:layout_constraintStart_toEndOf="@+id/tvVendor"
+            app:layout_constraintTop_toTopOf="@+id/tvVendor"
+            tools:text="10002" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleColor"
+            style="@style/normal_text.SemiBold"
+            android:layout_marginStart="12dp"
+            android:text="@string/diagnostic"
+            app:layout_constraintStart_toEndOf="@+id/tvTittle"
+            app:layout_constraintTop_toTopOf="@+id/tvTittle" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvColorName"
+            style="@style/normal_text"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@{item.diagnostic}"
+            android:textAlignment="textStart"
+            app:layout_constraintStart_toEndOf="@+id/tvTitleColor"
+            app:layout_constraintTop_toTopOf="@+id/tvTitleColor"
+            tools:text="black" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/toggle_checked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_checked"
+            android:visibility="@{isPay ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTittle" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/bOption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="end"
+            app:constraint_referenced_ids="tvTittle,tvVendor"
+            tools:layout_editor_absoluteX="170dp"
+            tools:layout_editor_absoluteY="8dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTestFormDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:nestedScrollingEnabled="false"
+            setTestFormDetail="@{item.testFormDetail}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintTop_toBottomOf="@+id/tvColorName"
+            tools:itemCount="3"
+            tools:layout_editor_absoluteX="16dp"
+            tools:listitem="@layout/item_test_form_detail" />
+
+        <View
+            style="@style/divider"
+            android:layout_height="0.6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -8,13 +8,14 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivEmpty"
-            android:layout_width="@dimen/size_100dp"
-            android:layout_height="@dimen/size_100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
             android:layout_margin="@dimen/layout_margin_32dp"
             app:layout_constraintBottom_toTopOf="@id/tvDescription"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/bill" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/document" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvDescription"

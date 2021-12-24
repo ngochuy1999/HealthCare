@@ -26,6 +26,7 @@ const val CART = "CART"
 const val ORDERING_HIGH = "-price_range_ordering"
 const val ORDERING_LOW = "price_range_ordering"
 const val TOKEN_FCM = "TOKEN_FCM"
+const val IS_LIKE = "IS_LIKE"
 
 class PrefUtil constructor(
     private val context: Context,

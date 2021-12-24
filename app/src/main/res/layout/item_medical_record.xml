@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.ptithcm.core.model.MedicalRecord" />
+
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin_12dp"
+        app:cardCornerRadius="@dimen/layout_margin_8dp"
+        app:cardElevation="@dimen/layout_margin_4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/shippingAddressContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/layout_margin_8dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/shippingAddressText"
+            style="@style/normal_text.bold"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:text="@string/medical_records"
+            android:textAlignment="viewStart"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBoughtDate"
+            style="@style/normal_text.bold"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:layout_marginTop="@dimen/layout_margin_8dp"
+            android:textAlignment="textEnd"
+            android:textColor="#F44336"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="30/09/2021" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="tvTitleName, tvTitlePhone, tvTitleAddress" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitleName"
+                style="@style/normal_text.grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_12dp"
+                android:layout_marginTop="@dimen/layout_margin_12dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/id"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shippingAddressText" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            style="@style/normal_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:maxLines="1"
+            android:text="@{item.recordId.toString()}"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvTitleName"
+            app:layout_constraintEnd_toStartOf="@+id/avatar"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text="Huy" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitlePhone"
+                style="@style/normal_text.grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin_8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/doc"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/tvTitleName"
+                app:layout_constraintTop_toBottomOf="@id/tvTitleName" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPhone"
+            style="@style/normal_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:text="@{item.medicalBill.doctor.firstName}"
+            android:maxLines="1"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvTitlePhone"
+            app:layout_constraintEnd_toStartOf="@+id/avatar"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text="BS.Nam" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitleAddress"
+                style="@style/normal_text.grey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin_8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@string/result"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@id/tvTitleName"
+                app:layout_constraintTop_toBottomOf="@id/tvTitlePhone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAddress"
+            style="@style/normal_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{item.diagnostic}"
+            android:layout_marginStart="@dimen/layout_margin_8dp"
+            android:lineSpacingExtra="2dp"
+            android:textAlignment="textStart"
+            app:layout_constraintBaseline_toBaselineOf="@id/tvTitleAddress"
+            app:layout_constraintEnd_toStartOf="@+id/avatar"
+            app:layout_constraintStart_toEndOf="@id/barrier"
+            tools:text="đau đầu" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_medical_bill"
+            app:civ_border_color="#FFFFFF"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

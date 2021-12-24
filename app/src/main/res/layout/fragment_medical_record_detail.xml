@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+
+        <import type="com.ptithcm.healthcare.util.DateUtils"/>
+
+        <variable
+            name="reExamDate"
+            type="String" />
+
+        <variable
+            name="fragment"
+            type="com.ptithcm.healthcare.view.medicalrecord.MedicalRecordDetailFramgment" />
+    </data>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swRefreshInvoiceDetail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBackground"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/layout_margin_16dp"
+                android:paddingBottom="@dimen/size_32dp">
+
+                <include
+                    android:id="@+id/medical_info"
+                    layout="@layout/item_medical_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <include
+                    android:id="@+id/patient_info"
+                    layout="@layout/item_patient_infomation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_margin_16dp"
+                    app:layout_constraintTop_toBottomOf="@id/medical_info"
+                    tools:visibility="visible" />
+
+                <include
+                    android:id="@+id/doctor_info"
+                    layout="@layout/item_doctor_information"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_margin_16dp"
+                    app:layout_constraintTop_toBottomOf="@id/patient_info"
+                    tools:visibility="visible" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/layout_margin_8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/doctor_info">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/shippingAddressText"
+                        style="@style/normal_text.bold"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="@dimen/layout_margin_8dp"
+                        android:layout_marginTop="@dimen/layout_margin_8dp"
+                        android:text="@string/resultx"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTitleName"
+                        style="@style/normal_text.grey"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/layout_margin_12dp"
+                        android:layout_marginStart="@dimen/layout_margin_8dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textAlignment="textStart"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/shippingAddressText"
+                        tools:text="kết quả"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <include
+                    layout="@layout/item_prescription"
+                    android:id="@+id/rvPrescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_margin_16dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintTop_toBottomOf="@id/result" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/re_examination"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/layout_margin_8dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/rvPrescription">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/reExamText"
+                        style="@style/normal_text.bold"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="@dimen/layout_margin_8dp"
+                        android:layout_marginTop="@dimen/layout_margin_8dp"
+                        android:text="@string/re_examination_schedule"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvDate"
+                        style="@style/normal_text.SemiBold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/layout_margin_12dp"
+                        android:layout_marginStart="@dimen/layout_margin_8dp"
+                        android:ellipsize="end"
+                        android:textColor="#4CAF50"
+                        android:maxLines="1"
+                        android:text="@{DateUtils.convertFormat(reExamDate, DateUtils.DEFAULT_COMMENT_FORMAT, DateUtils.DEFAULT_DATE_FORMAT)}"
+                        android:textAlignment="center"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/reExamText"
+                        tools:text="16/12/2021"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</layout>

@@ -73,4 +73,12 @@ class CheckoutRepositoryImpl(val api: ApiService, val apiHealthCare: ApiHealthCa
                 apiHealthCare.requestCheckout(requestCheckoutParam)
         }.build().asLiveData()
     }
+
+    override suspend fun cancelBill(billId: Int?): LiveData<Result<ObjectResponse<Any>>> {
+        return object : NetworkBoundResource<ObjectResponse<Any>, ObjectResponse<Any>>() {
+            override fun processResponse(response: ObjectResponse<Any>) = response
+            override suspend fun createCall(): Response<ObjectResponse<Any>> =
+                apiHealthCare.cancelBill(billId)
+        }.build().asLiveData()
+    }
 }

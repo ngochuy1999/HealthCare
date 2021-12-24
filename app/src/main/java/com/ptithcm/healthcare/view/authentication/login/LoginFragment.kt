@@ -63,6 +63,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         activity?.btnNav?.gone()
         observeViewModel()
         typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular)
+
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            task.result?.let { requireContext().setStringPref(TOKEN_FCM, it) }
+        } )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -116,12 +120,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                     result: BiometricPrompt.AuthenticationResult
                 ) {
                     messageHandler?.runMessageHandler(getString(R.string.login_success))
-                    startActivity<MainActivity>()
-                    requireActivity().finish()
                     CoreApplication.instance.accountBio?.let {
-                        CoreApplication.instance.saveAccount(
-                            it
-                        )
+                        CoreApplication.instance.saveAccount(it)
+                        authViewModel.getProfile(it.accountId)
                     }
                 }
 
@@ -168,12 +169,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }else{
                 messageHandler?.runMessageHandler(it.message?:"Đăng nhập thành công")
                 it.data?.let { it1 -> CoreApplication.instance.saveAccount(it1) }
-                FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-                    task.result?.let { requireContext().setStringPref(TOKEN_FCM, it) }
-                } )
-                token = requireContext().getStringPref(TOKEN_FCM)
-                authViewModel.changeFCMToken(it.data?.accountId,token)
 
+                authViewModel.changeFCMToken(it.data?.accountId,token)
 
                 it.data?.let { it1 -> authViewModel.getProfile(it1.accountId) }
 
@@ -229,6 +226,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         when (v?.id) {
             R.id.btn_sign_in -> {
                 if (isValidInput()) {
+
+                    token = requireContext().getStringPref(TOKEN_FCM)
                     viewBinding.btnSignIn.isLoading = true
                     authViewModel.logIn(
                         LogInParam(

@@ -24,7 +24,7 @@ import com.ptithcm.healthcare.ext.*
 import com.ptithcm.healthcare.util.BindingAdapterText
 import com.ptithcm.healthcare.util.PopUp
 import com.ptithcm.healthcare.view.MainActivity
-import com.ptithcm.healthcare.viewmodel.ShoppingViewModel
+import com.ptithcm.healthcare.viewmodel.MedicalBillViewModel
 import com.ptithcm.healthcare.widget.RecyclerRefreshLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -34,7 +34,7 @@ class ShoppingBagFragment : BaseFragment<FragmentShoppingBagBinding>(), View.OnC
     override val layoutId: Int
         get() = R.layout.fragment_shopping_bag
 
-    private val basketViewModel: ShoppingViewModel by viewModel()
+    private val basketViewModel: MedicalBillViewModel by viewModel()
 
     private var isLogin = false
     private val adapter = ShoppingCardAdapter(this::adapterListener)

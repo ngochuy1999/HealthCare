@@ -28,12 +28,13 @@
                 android:id="@+id/vTag"
                 android:layout_width="@dimen/size_32dp"
                 android:layout_height="0dp"
-                android:background="#1473ae"
+                android:background="#E8AF05"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ic_online"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/layout_margin_10dp"
@@ -46,6 +47,7 @@
                 app:srcCompat="@drawable/ic_flash" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_process"
                 style="@style/normal_text.bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -59,18 +61,41 @@
                 app:layout_constraintBottom_toBottomOf="@id/vTag"
                 app:layout_constraintEnd_toEndOf="@id/vTag"
                 app:layout_constraintStart_toStartOf="@id/vTag" />
+            <TextView
+                android:id="@+id/txt_wait_time"
+                style="@style/normal_text.bold"
+                android:text="@string/wait_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_margin_12dp"
+                android:textAlignment="textStart"
+                android:textColor="#00a770"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/wait_time"
+                style="@style/normal_text.bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/layout_margin_12dp"
+                android:paddingBottom="@dimen/layout_margin_12dp"
+                android:textAlignment="textStart"
+                android:textColor="#00a770"
+                app:layout_constraintStart_toEndOf="@id/txt_wait_time"
+                app:layout_constraintTop_toTopOf="@+id/txt_wait_time"
+                tools:text="0 minute" />
 
             <TextView
                 android:id="@+id/tvBoughtDate"
                 style="@style/normal_text.bold"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_margin_12dp"
-                android:text="@{DateUtils.convertFormat(item.date, DateUtils.DATE_FORMAT_SERVER, DateUtils.DEPARTURE_TIME_FORMAT)}"
+                android:text="@{DateUtils.convertFormat(item.timePrediction, DateUtils.DATE_FORMAT_SERVER, DateUtils.DEPARTURE_TIME_FORMAT)}"
                 android:textAlignment="textEnd"
-                android:textColor="#cc0066"
+                android:textColor="#F44336"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/vTag"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="30/09/2021" />
 
@@ -81,6 +106,85 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/vTag"
                 app:layout_constraintTop_toBottomOf="@id/tvBoughtDate" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDoctor"
+                android:layout_width="@dimen/size_18dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/layout_margin_12dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_doctor_svgrepo_com"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="@id/tvDoctor" />
+
+            <TextView
+                android:id="@+id/tvDoctor"
+                style="@style/normal_text.bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_4dp"
+                android:layout_marginTop="@dimen/layout_margin_12dp"
+                android:layout_marginEnd="@dimen/layout_margin_12dp"
+                android:text="@{item.doctor.firstName}"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivDoctor"
+                app:layout_constraintTop_toBottomOf="@id/tvBoughtDate"
+                tools:text="Doctor Name" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivSick"
+                android:layout_width="@dimen/size_18dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/layout_margin_12dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_sick_svgrepo_com__1_"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="@id/tvSick" />
+
+            <TextView
+                android:id="@+id/tvSick"
+                style="@style/normal_text.bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_4dp"
+                android:layout_marginTop="@dimen/layout_margin_4dp"
+                android:layout_marginEnd="@dimen/layout_margin_12dp"
+                android:text="@{item.doctor.speciality.description}"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivName"
+                app:layout_constraintTop_toBottomOf="@id/tvDoctor"
+                tools:text="Sick" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivRoom"
+                android:layout_width="@dimen/size_18dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/layout_margin_12dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_clinic_svgrepo_com"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toEndOf="@id/vTag"
+                app:layout_constraintTop_toTopOf="@id/tvRoom" />
+
+            <TextView
+                android:id="@+id/tvRoom"
+                style="@style/normal_text.bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/layout_margin_4dp"
+                android:layout_marginTop="@dimen/layout_margin_4dp"
+                android:layout_marginEnd="@dimen/layout_margin_12dp"
+                android:text="@{item.doctor.consultingRoom.clinicName}"
+                android:textAlignment="textStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivName"
+                app:layout_constraintTop_toBottomOf="@id/tvSick"
+                tools:text="Consulting Room" />
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivName"
@@ -95,81 +199,28 @@
 
             <TextView
                 android:id="@+id/tvName"
-                style="@style/normal_text.bold"
+                style="@style/normal_text.grey"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_margin_4dp"
-                android:layout_marginTop="@dimen/layout_margin_12dp"
+                android:layout_marginTop="@dimen/layout_margin_4dp"
                 android:layout_marginEnd="@dimen/layout_margin_12dp"
                 android:text="@{item.patient.name}"
                 android:textAlignment="textStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/ivName"
-                app:layout_constraintTop_toBottomOf="@id/tvBoughtDate"
+                app:layout_constraintTop_toBottomOf="@id/tvRoom"
                 tools:text="Name" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivPhone"
-                android:layout_width="@dimen/size_18dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/layout_margin_12dp"
-                android:adjustViewBounds="true"
-                android:padding="@dimen/layout_margin_2dp"
-                android:src="@drawable/ic_phone"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toEndOf="@id/vTag"
-                app:layout_constraintTop_toTopOf="@id/tvPhone" />
-
-            <TextView
-                android:id="@+id/tvPhone"
-                style="@style/normal_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/layout_margin_4dp"
-                android:layout_marginTop="@dimen/layout_margin_4dp"
-                android:layout_marginEnd="@dimen/layout_margin_12dp"
-                android:text="@{item.patient.account.phone}"
-                android:textAlignment="textStart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivPhone"
-                app:layout_constraintTop_toBottomOf="@id/tvName"
-                tools:text="Phone" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivAddress"
-                android:layout_width="@dimen/size_18dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="@dimen/layout_margin_12dp"
-                android:adjustViewBounds="true"
-                android:src="@drawable/ic_location"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintStart_toEndOf="@id/vTag"
-                app:layout_constraintTop_toTopOf="@id/tvAddress" />
-
-            <TextView
-                android:id="@+id/tvAddress"
-                style="@style/normal_text"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/layout_margin_4dp"
-                android:layout_marginTop="@dimen/layout_margin_4dp"
-                android:layout_marginEnd="@dimen/layout_margin_12dp"
-                android:text="@{item.patient.address.toString()}"
-                android:textAlignment="textStart"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/ivAddress"
-                app:layout_constraintTop_toBottomOf="@id/tvPhone"
-                tools:text="Address" />
 
             <include
                 android:id="@+id/vDividerInfo"
                 layout="@layout/divider_header"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/layout_margin_1dp"
-                android:layout_marginTop="@dimen/layout_margin_12dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/vTag"
-                app:layout_constraintTop_toBottomOf="@id/tvAddress" />
+                app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
             <TextView
                 android:id="@+id/tvInvoiceStatus"

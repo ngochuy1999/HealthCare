@@ -34,37 +34,24 @@ const val KEY_EMPTY = ""
 const val KEY_ARGUMENT = "key_argument"
 const val KEY_ARGUMENT_REFINE = "key_refine"
 const val KEY_DESIGNER = "key_designer"
-const val KEY_CATEGORY = "key_category"
-const val KEY_TYPE = "key_type"
-const val KEY_ID = "key_id"
 const val KEY_SEARCH = "key_search"
 const val KEY_BANNER_CATEGORY = "key_banner_category"
-const val KEY_MAIN_CATEGORIES = "key_main_categories"
 const val IS_PRODUCT = "key_product"
-const val IS_FROM_BRAND_PROFILE = "IS_FROM_BRAND_PROFILE"
-const val REQUEST_FRAGMENT = 999
 const val POPUP_MODEL = "popup_model"
 const val ERROR_CODE_404 = 404
 const val VIEW_ALL = "View All"
-const val GOTO_ACTIVITY_STORY = 1001
 const val KEY_IS_CHOOSE_ADDRESS = "key_is_choose_address"
 
-const val KEY_SEARCH_BY_CATEGORIES = "key_search_by_categories"
-const val KEY_SEARCH_BY_DESIGNERS = "key_search_by_designers"
 
 const val PRICE_ASC = 1
 const val PRICE_DESC = 2
 const val NEWEST = 3
 const val OLDEST = 4
-const val SEARCH_BY_CATEGORIES = 1
-const val SEARCH_BY_DESIGNER = 2
 const val KEY_IS_SHOW_FILTER_BY = "key_is_show_filter_by"
 
 const val BIOMETRIC_AUTHENTICATION = "Biometric Authentication"
 const val BIOMETRIC_AUTHENTICATION_SUBTITLE = "Use your fingerprint to authenticate"
 const val BIOMETRIC_AUTHENTICATION_DESCRIPTION = "This app uses your makes use of device biometrics (user fingerprint) to authenticate the dialog."
-
-const val AUTHENTICATE_OTHER="Authenticate using Device Password/PIN"
 
 const val CANCEL="Cancel"
 

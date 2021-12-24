@@ -1,7 +1,10 @@
 package com.ptithcm.core.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Profile(
     var account: Account? = null,
     var active: Int? =null,
@@ -12,4 +15,4 @@ data class Profile(
     var imageUrl: String?="",
     var name: String?= "",
     var userId: Int? =null
-)
+): Parcelable

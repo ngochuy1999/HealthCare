@@ -25,6 +25,6 @@ fun getCurrentDateTime(): Date {
     return Calendar.getInstance().time
 }
 
-fun getCurrentDateInMills() : Long{
+fun getCurrentDateInMills() : Long {
     return Calendar.getInstance().timeInMillis
 }

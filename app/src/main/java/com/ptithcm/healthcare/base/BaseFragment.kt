@@ -50,9 +50,8 @@ abstract class BaseFragment<ViewBinding: ViewDataBinding> : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             executePendingBindings()
         }
-
-        bindEvent()
         bindViewModel()
+        bindEvent()
     }
 
     open fun bindViewModel(){}

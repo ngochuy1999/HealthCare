@@ -15,11 +15,8 @@ class AuthenticationActivity : BaseActivity<ActivityAuthenticationBinding>() {
     override val layoutId: Int
         get() = R.layout.activity_authentication
 
-    private val shareDataViewmodel by viewModel<ShareDataViewModel>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        shareDataViewmodel.getAllTags()
     }
 
 }

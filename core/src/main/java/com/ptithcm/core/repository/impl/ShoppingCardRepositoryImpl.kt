@@ -124,6 +124,15 @@ class ShoppingCardRepositoryImpl(val api: ApiService, val apiHealthCareService: 
         }.build().asLiveData()
     }
 
+    override suspend fun getTestForm(id: Int): LiveData<Result<ArrayList<TestForm>>> {
+        return object : NetworkBoundResource<ArrayList<TestForm>, ArrayList<TestForm>>() {
+            override fun processResponse(response: ArrayList<TestForm>) = response
+            override suspend fun createCall(): Response<ArrayList<TestForm>> =
+                apiHealthCareService.getTestForm(id)
+        }.build().asLiveData()
+    }
+
+
     override suspend fun getAllConsultPatient(id: Int): LiveData<Result<ArrayList<MedicalBill>>> {
         return object : NetworkBoundResource<ArrayList<MedicalBill>, ArrayList<MedicalBill>>() {
             override fun processResponse(response: ArrayList<MedicalBill>) = response
@@ -137,6 +146,23 @@ class ShoppingCardRepositoryImpl(val api: ApiService, val apiHealthCareService: 
             override fun processResponse(response: ObjectResponse<MedicalBill>) = response
             override suspend fun createCall(): Response<ObjectResponse<MedicalBill>> =
                 apiHealthCareService.addMedicalBill(medicalBillParam)
+        }.build().asLiveData()
+    }
+
+    override suspend fun checkIsLike(pid: Int?, doctorId: Int): LiveData<Result<ObjectResponse<Boolean>>> {
+        return object : NetworkBoundResource<ObjectResponse<Boolean>, ObjectResponse<Boolean>>() {
+            override fun processResponse(response: ObjectResponse<Boolean>) = response
+            override suspend fun createCall(): Response<ObjectResponse<Boolean>> =
+                apiHealthCareService.chekIsLike(pid,doctorId)
+        }.build().asLiveData()
+    }
+
+
+    override suspend fun getResultDetail(resultId: Int?): LiveData<Result<ArrayList<TestResultDetail>>> {
+        return object : NetworkBoundResource<ArrayList<TestResultDetail>, ArrayList<TestResultDetail>>() {
+            override fun processResponse(response: ArrayList<TestResultDetail>) = response
+            override suspend fun createCall(): Response<ArrayList<TestResultDetail>> =
+                apiHealthCareService.getResultDetail(resultId)
         }.build().asLiveData()
     }
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_medical_record"
+    app:startDestination="@id/medicalRecordPagerFragment">
+
+
+    <fragment
+        android:id="@+id/medicalRecordPagerFragment"
+        android:name="com.ptithcm.healthcare.view.medicalrecord.MedicalRecordPagerFragment"
+        android:label="MedicalRecordPagerFragment" />
+    <fragment
+        android:id="@+id/medicalRecordBookFragment"
+        android:name="com.ptithcm.healthcare.view.medicalrecord.MedicalRecordBookFragment"
+        android:label="MedicalRecordBookFragment" />
+    <fragment
+        android:id="@+id/medicalRecordDetailFramgment"
+        android:name="com.ptithcm.healthcare.view.medicalrecord.MedicalRecordDetailFramgment"
+        android:label="MedicalRecordDetailFramgment" />
+    <fragment
+        android:id="@+id/testResultDetailFragment"
+        android:name="com.ptithcm.healthcare.view.medicalrecord.TestResultDetailFragment"
+        android:label="TestResultDetailFragment" />
+
+
+</navigation>

@@ -212,5 +212,6 @@ dependencies {
     implementation 'androidx.biometric:biometric:1.1.0'
 
     implementation "androidx.work:work-runtime:2.7.1"
+
 }
 apply plugin: 'com.google.gms.google-services'

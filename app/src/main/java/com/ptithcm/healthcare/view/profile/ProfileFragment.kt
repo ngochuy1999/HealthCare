@@ -24,9 +24,9 @@ import com.bumptech.glide.Glide
 import com.ptithcm.core.BuildConfig
 import com.ptithcm.core.CoreApplication
 import com.ptithcm.core.model.Account
+import com.ptithcm.core.model.Info
 import com.ptithcm.core.model.Profile
 import com.ptithcm.core.model.ShopInfo
-import com.ptithcm.core.param.UpdateDetailParam
 import com.ptithcm.healthcare.R
 import com.ptithcm.healthcare.base.BaseActivity
 import com.ptithcm.healthcare.base.BaseFragment
@@ -46,6 +46,8 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import pub.devrel.easypermissions.AfterPermissionGranted
 import java.io.File
+import java.util.*
+
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickListener {
 
@@ -61,6 +63,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
     private var currentProfile: Profile? = null
     private var currentAccount: Account? = null
     private var shopInfo: ShopInfo? = null
+    private var appInfo: Info? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,15 +71,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
             viewBinding.btnNav.visible()
             isShowLoading(false)
         }
-
         val glideApp = Glide.with(context!!)
-        glideApp.load(currentProfile?.account?.cover)
+        glideApp.load(currentAccount?.cover)
             .placeholder(R.color.white)
             .centerCrop()
             .error(R.drawable.bg_login)
             .into(viewBinding.profileCustomer.cover)
 
-        glideApp.load(currentProfile?.account?.photo)
+        glideApp.load(currentAccount?.avatar)
             .placeholder(R.color.white)
             .error(R.drawable.bg_login)
             .into(viewBinding.profileCustomer.avatar)
@@ -87,9 +89,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
     }
 
     private fun setShopInfo() {
-        shopInfo = CoreApplication.instance.shopInfo
-        viewBinding.profileCustomer.tvAppVer.text = getString(R.string.appVer, shopInfo?.versionApp)
-        viewBinding.profileCustomer.btnPhoneNumber.text = getString(R.string.phoneShop, shopInfo?.phoneNumber)
+        userViewModel.getAppInfo()
+//        shopInfo = CoreApplication.instance.shopInfo
+//        viewBinding.profileCustomer.tvAppVer.text = getString(R.string.appVer, shopInfo?.versionApp)
+//        viewBinding.profileCustomer.btnPhoneNumber.text = getString(R.string.phoneShop, shopInfo?.phoneNumber)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,11 +121,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
             }
 
         })
-//        userViewModel.getProfileLiveData.observe(this, {
-//            CoreApplication.instance.profile?.account = it
+        userViewModel.infoAppLiveData.observe(this,{
+            appInfo = it
+            viewBinding.profileCustomer.tvAppVer.text = getString(R.string.appVer, it.versionApp)
+            viewBinding.profileCustomer.btnPhoneNumber.text = getString(R.string.phoneShop, it.phoneNumber)
+        })
+        userViewModel.updateCoverLiveData.observe(this, {
+            it.data?.let { it1 -> CoreApplication.instance.saveAccount(it1) }
 //            currentProfile = CoreApplication.instance.profile
 //            userViewModel.getProfileLiveData.removeObservers(this)
-//        })
+        })
+        userViewModel.updateImageLiveData.observe(this, {
+            it.data?.let { it1 -> CoreApplication.instance.saveAccount(it1) }
+//            currentProfile = CoreApplication.instance.profile
+//            userViewModel.getProfileLiveData.removeObservers(this)
+        })
         userViewModel.updateDetailLiveData.observe(this, Observer {
             CoreApplication.instance.saveUser(currentProfile ?: return@Observer)
         })
@@ -193,21 +206,21 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
             R.id.payment_method_btn -> {
                 navController.navigate(R.id.nav_payment_methods)
             }
-            R.id.invoice -> {
+            R.id.medical_history -> {
                 val bundle = Bundle()
-                bundle.putInt("invoiceId", 0)
-                navController.navigate(R.id.nav_invoices, bundle)
+                bundle.putInt("medicalId", 0)
+                navController.navigate(R.id.nav_medical_history, bundle)
             }
 
-            R.id.invoiceShipped -> {
+            R.id.medical_complete -> {
                 val bundle = Bundle()
-                bundle.putInt("invoiceId", 3)
-                navController.navigate(R.id.nav_invoices, bundle)
+                bundle.putInt("medicalId", 1)
+                navController.navigate(R.id.nav_medical_history, bundle)
             }
-            R.id.invoiceCancel -> {
+            R.id.medical_cancel -> {
                 val bundle = Bundle()
-                bundle.putInt("invoiceId", 4)
-                navController.navigate(R.id.nav_invoices, bundle)
+                bundle.putInt("medicalId", 2)
+                navController.navigate(R.id.nav_medical_history, bundle)
             }
             R.id.avatar -> {
                 photoType = PhotoType.PROFILE_PHOTO
@@ -258,7 +271,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
             }
         } else {
             // Permission has already been granted
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + shopInfo?.phoneNumber))
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:" + appInfo?.phoneNumber))
             startActivity(intent)
         }
     }
@@ -407,6 +420,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
             file
         )
         transferObserverListener(transferObserver)
+
     }
 
     private fun transferObserverListener(transferObserver: TransferObserver) {
@@ -416,13 +430,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
                     val url = s3Client.getUrl(BuildConfig.AWS_BUCKET, photoStoragePath)
                     when (photoType) {
                         PhotoType.PROFILE_PHOTO -> {
-                            currentProfile?.account?.photo = "$url"
+                            currentProfile?.account?.avatar = "$url"
+                            updateImage("$url")
                         }
                         PhotoType.COVER_PHOTO -> {
                             currentProfile?.account?.cover = "$url"
+                            updateCover("$url")
+
                         }
                     }
-                    updateProfile()
                 }
             }
 
@@ -434,14 +450,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(), View.OnClickList
         })
     }
 
-    private fun updateProfile() {
-//        UpdateDetailParam(
-//            first_name = currentProfile?.account?.first_name ?: "",
-//            last_name = currentProfile?.account?.last_name ?: "",
-//            email = currentProfile?.account?.email ?: "",
-//            cover = currentProfile?.account?.cover ?: "",
-//            photo = currentProfile?.account?.photo ?: ""
-//        )
-//        userViewModel.updateProfile(param)
+    private fun updateImage(url: String) {
+        userViewModel.updateImage(url)
+    }
+
+    private fun updateCover(url: String) {
+        userViewModel.updateCover(url)
     }
 }

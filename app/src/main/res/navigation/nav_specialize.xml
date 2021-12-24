@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_specialize"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/listSpecializeFragment2">
+
+    <fragment
+        android:id="@+id/listSpecializeFragment2"
+        android:name="com.ptithcm.healthcare.view.specialize.ListSpecializeFragment"
+        android:label="ListSpecializeFragment"
+        tools:layout="@layout/fragment_list_specialize"/>
+    <fragment
+        android:id="@+id/doctorBySpecialFragment2"
+        android:name="com.ptithcm.healthcare.view.doctor.DoctorBySpecialFragment"
+        android:label="DoctorBySpecialFragment" />
+</navigation>

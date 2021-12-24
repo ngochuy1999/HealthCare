@@ -62,7 +62,7 @@
     </fragment>
 
     <include app:graph="@navigation/nav_book_address" />
-    <include app:graph="@navigation/nav_invoices" />
+    <include app:graph="@navigation/nav_medical_history" />
 
     <include app:graph="@navigation/nav_payment_methods" />
 
@@ -78,11 +78,6 @@
         android:name="com.ptithcm.healthcare.view.sizeguide.SizeGuideFragment"
         android:label="SizeGuideFragment" />
     <include app:graph="@navigation/nav_shopping_card" />
-    <fragment
-        android:id="@+id/fragment_over_view"
-        android:name="com.ptithcm.healthcare.view.wishlist.OverViewFragment"
-        android:label="OverViewFragment" />
-    <include app:graph="@navigation/nav_search" />
 
     <include app:graph="@navigation/nav_product" />
     <fragment

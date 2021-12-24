@@ -30,4 +30,5 @@ interface CheckoutRepository {
     suspend fun checkoutPlaceOrder(checkoutParam: CheckoutParam): LiveData<Result<Checkout>>
 
     suspend fun requestCheckout(requestCheckoutParam: RequestCheckoutParam): LiveData<Result<ObjectResponse<Any>>>
+    suspend fun cancelBill(billId: Int?): LiveData<Result<ObjectResponse<Any>>>
 }

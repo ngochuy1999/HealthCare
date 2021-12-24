@@ -56,6 +56,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
         }
         activity?.btnNav?.visibility = View.GONE
         typeface = ResourcesCompat.getFont(requireContext(), R.font.montserrat_regular)
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            task.result?.let { requireContext().setStringPref(TOKEN_FCM, it) }
+        } )
 
     }
 
@@ -149,9 +152,6 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
             R.id.btn_register -> {
                 if (checkValidUpdate()) {
                     viewBinding.btnRegister.isLoading = true
-                    FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-                        task.result?.let { requireContext().setStringPref(TOKEN_FCM, it) }
-                    } )
                     token = requireContext().getStringPref(TOKEN_FCM)
                     authViewModel.signUp(
                         AccountParam(

@@ -169,13 +169,14 @@
                 app:layout_constraintTop_toBottomOf="@id/payment_method_btn" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/invoice"
+                android:id="@+id/medical_history"
                 style="@style/textProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_medical_bill"
                 android:drawableEnd="@drawable/ic_right_arrow"
                 android:drawableTint="@color/black"
+                android:visibility="gone"
                 android:gravity="center_vertical"
                 android:onClick="@{(v) -> parentFragment.onClick(v)}"
                 android:text="@string/medical_book"
@@ -187,12 +188,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/invoice">
+                app:layout_constraintTop_toBottomOf="@id/medical_history">
 
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/invoiceShipped"
+                    android:id="@+id/medical_complete"
                     style="@style/textProfile"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -203,7 +205,7 @@
                     android:textAlignment="center" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/invoiceCancel"
+                    android:id="@+id/medical_cancel"
                     style="@style/textProfile"
                     android:layout_width="0dp"
                     android:layout_weight="1"

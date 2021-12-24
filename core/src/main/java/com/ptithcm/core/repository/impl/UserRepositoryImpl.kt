@@ -18,6 +18,7 @@ import com.ptithcm.core.vo.ItemViewModel
 import com.ptithcm.core.vo.ListResponse
 import com.ptithcm.core.vo.Listing
 import com.ptithcm.core.vo.Result
+import okhttp3.ResponseBody
 import retrofit2.Response
 
 class UserRepositoryImpl (val api: ApiService, val apiHealthCare: ApiHealthCareService): UserRepository {
@@ -46,6 +47,23 @@ class UserRepositoryImpl (val api: ApiService, val apiHealthCare: ApiHealthCareS
         }.build().asLiveData()
     }
 
+    override suspend fun updateImage(url: String): LiveData<Result<ObjectResponse<Account>>> {
+        return object : NetworkBoundResource<ObjectResponse<Account>, ObjectResponse<Account>>(){
+            override fun processResponse(response: ObjectResponse<Account>) = response
+            override suspend fun createCall(): Response<ObjectResponse<Account>> =
+                apiHealthCare.updateImage(url)
+
+        }.build().asLiveData()
+    }
+
+    override suspend fun updateCover(url: String): LiveData<Result<ObjectResponse<Account>>> {
+        return object : NetworkBoundResource<ObjectResponse<Account>, ObjectResponse<Account>>(){
+            override fun processResponse(response: ObjectResponse<Account>) = response
+            override suspend fun createCall(): Response<ObjectResponse<Account>> =
+                apiHealthCare.updateCover(url)
+
+        }.build().asLiveData()
+    }
 
     override suspend fun getProfile(): LiveData<Result<User>> {
         return object : NetworkBoundResource<User, User>() {
@@ -54,6 +72,41 @@ class UserRepositoryImpl (val api: ApiService, val apiHealthCare: ApiHealthCareS
         }.build().asLiveData()
     }
 
+    override suspend fun getMedicalRecord(pid: Int?): LiveData<Result<ArrayList<MedicalRecord>>> {
+        return object :
+            NetworkBoundResource<ArrayList<MedicalRecord>, ArrayList<MedicalRecord>>() {
+            override fun processResponse(response: ArrayList<MedicalRecord>) = response
+            override suspend fun createCall(): Response<ArrayList<MedicalRecord>> =
+                apiHealthCare.getMedicalRecord(pid)
+        }.build().asLiveData()
+    }
+
+    override suspend fun getTestResult(accountId: Int?): LiveData<Result<ArrayList<TestResult>>> {
+        return object :
+            NetworkBoundResource<ArrayList<TestResult>, ArrayList<TestResult>>() {
+            override fun processResponse(response: ArrayList<TestResult>) = response
+            override suspend fun createCall(): Response<ArrayList<TestResult>> =
+                apiHealthCare.getTestResult(accountId)
+        }.build().asLiveData()
+    }
+
+    override suspend fun getTreatmentRegiment(recordId: Int?): LiveData<Result<TreatmentRegiment>> {
+        return object :
+            NetworkBoundResource<TreatmentRegiment, TreatmentRegiment>() {
+            override fun processResponse(response: TreatmentRegiment) = response
+            override suspend fun createCall(): Response<TreatmentRegiment> =
+                apiHealthCare.getTreatmentRegiment(recordId)
+        }.build().asLiveData()
+    }
+
+    override suspend fun getAppInfo(): LiveData<Result<Info>> {
+        return object :
+            NetworkBoundResource<Info, Info>() {
+            override fun processResponse(response: Info) = response
+            override suspend fun createCall(): Response<Info> =
+                apiHealthCare.getVersionApp()
+        }.build().asLiveData()
+    }
 
     override suspend fun getAllAddress(): LiveData<Result<ArrayList<ShoppingAddress>>> {
         return object :
@@ -71,6 +124,7 @@ class UserRepositoryImpl (val api: ApiService, val apiHealthCare: ApiHealthCareS
                 apiHealthCare.addAddress(param)
         }.build().asLiveData()
     }
+
 
     override suspend fun updateAddress(param: ShoppingAddress): LiveData<Result<ObjectResponse<Int>>> {
         return object : NetworkBoundResource<ObjectResponse<Int>, ObjectResponse<Int>>() {
