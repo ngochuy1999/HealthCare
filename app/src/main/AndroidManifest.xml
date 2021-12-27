@@ -50,11 +50,6 @@
             android:name="com.ptithcm.healthcare.view.profile.ProfileCropImageActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-   
-        <activity
-            android:name="com.ptithcm.healthcare.view.uploadproduct.UploadProductActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan" />
 
         <activity
             android:name="com.ptithcm.healthcare.view.splash.SplashActivity"

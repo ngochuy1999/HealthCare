@@ -20,7 +20,6 @@ import com.ptithcm.healthcare.constant.KEY_SEARCH
 import com.ptithcm.healthcare.databinding.FragmentSearchResultBinding
 import com.ptithcm.healthcare.ext.*
 import com.ptithcm.healthcare.view.MainActivity
-import com.ptithcm.healthcare.view.search.adapter.SearchProductPagedAdapter
 import com.ptithcm.healthcare.viewmodel.CarouselDetailViewModel
 import com.ptithcm.healthcare.viewmodel.RefineViewModel
 import com.ptithcm.healthcare.viewmodel.WishListViewModel
@@ -31,7 +30,6 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_search_result
 
-    private lateinit var adapter: SearchProductPagedAdapter
 
     private val viewModelProduct: CarouselDetailViewModel by viewModel()
     private val viewModelRefine: RefineViewModel by sharedViewModel(from = { requireActivity() })
@@ -57,25 +55,24 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>() {
         viewBinding.fragment = this
         setupToolbar()
         initScroll()
-        initAdapter()
     }
 
     override fun bindViewModel() {
         super.bindViewModel()
-        viewModelProduct.refineProductLiveData.observe(this, Observer {
-            adapter.submitList(it)
-        })
-
-        viewModelProduct.productLoadStatusX.observe(this, Observer {
-            adapter.setNetworkState(it)
-            when (it) {
-                is Result.Error -> {
-                    if (adapter.currentList?.isEmpty() == true) {
-                        (requireActivity() as? MainActivity)?.isShowErrorNetwork(true)
-                    }
-                }
-            }
-        })
+//        viewModelProduct.refineProductLiveData.observe(this, Observer {
+//            adapter.submitList(it)
+//        })
+//
+//        viewModelProduct.productLoadStatusX.observe(this, Observer {
+//            adapter.setNetworkState(it)
+//            when (it) {
+//                is Result.Error -> {
+//                    if (adapter.currentList?.isEmpty() == true) {
+//                        (requireActivity() as? MainActivity)?.isShowErrorNetwork(true)
+//                    }
+//                }
+//            }
+//        })
 
         viewModelProduct.networkStateRefine.observe(this, Observer {
             (requireActivity() as? MainActivity)?.isShowLoading(it)
@@ -107,24 +104,6 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>() {
         }
     }
 
-    private fun initAdapter() {
-        adapter = SearchProductPagedAdapter(
-            listener = this::eventListener, listenerAddProduct = this::listenerAddProduct
-        )
-        val layoutManager = GridLayoutManager(requireContext(), 2)
-        viewBinding.rvProducts.layoutManager = layoutManager
-        viewBinding.rvProducts.adapter = adapter
-        viewBinding.rvProducts.addOnScrollListener(scrollListener)
-        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return when {
-                    position == 0 || (position == layoutManager.itemCount - 1 && adapter.hasExtraRow()) -> 2
-                    else -> 1
-                }
-            }
-        }
-    }
-
     private fun initScroll() {
         var isRunning = false
         scrollListener = object : RecyclerView.OnScrollListener() {
@@ -148,36 +127,6 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>() {
         }
     }
 
-    private fun eventListener(product: ProductClothes?, isRefine: Boolean) {
-        if (isRefine) {
-            navController.navigateAnimation(
-                R.id.nav_refine,
-                bundle = bundleOf(
-                    KEY_SEARCH to filterParam,
-                    KEY_IS_SHOW_FILTER_BY to false
-                )
-            )
-        } else {
-            navController.navigateAnimation(
-                R.id.fragment_product_detail,
-                bundle = bundleOf(KEY_ARGUMENT to product)
-            )
-        }
-    }
-
-    private fun listenerAddProduct(product: ProductClothes?, position: Int?) {
-        if (CoreApplication.instance.account != null) {
-            if (product?.isLike == 0)
-                product.isLike = 1
-            else
-                product?.isLike = 0
-
-            wishListViewModel.addAndRemoveToWishList(product?.id)
-        } else {
-            messageHandler?.runMessageErrorHandler(getString(R.string.error_add_product))
-        }
-    }
-
     private fun setupToolbar() {
         (activity as? MainActivity)?.apply {
             val toolbar = viewBinding.layoutToolbar.toolbar
@@ -187,7 +136,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>() {
                 when (it.id) {
                     R.id.ivRight, R.id.tvCount -> {
                         navController.navigateAnimation(
-                            R.id.nav_shopping_card,
+                            R.id.nav_qrcode,
                             isBotToTop = true
                         )
                     }

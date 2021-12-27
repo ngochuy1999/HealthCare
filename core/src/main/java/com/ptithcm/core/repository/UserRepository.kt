@@ -16,11 +16,6 @@ interface UserRepository {
     suspend fun updateProfile(param: EditAccountParam): LiveData<Result<ObjectResponse<Profile>>>
     suspend fun getProfile(): LiveData<Result<User>>
     suspend fun changePassword(param: ChangePassParam): LiveData<Result<ObjectResponse<Account>>>
-    suspend fun updateBookAddress(param: UpdateAddressParam): LiveData<Result<User>>
-    suspend fun getAllAddress(): LiveData<Result<ArrayList<ShoppingAddress>>>
-    suspend fun addAddress(param: ShoppingAddress): LiveData<Result<ObjectResponse<Int>>>
-    suspend fun updateAddress(param: ShoppingAddress): LiveData<Result<ObjectResponse<Int>>>
-    suspend fun deleteAddress(addressId: Int?): LiveData<Result<ObjectResponse<Int>>>
     suspend fun getPagingAllInvoices(
         pageSize: Int,
         pageNumber: Int,

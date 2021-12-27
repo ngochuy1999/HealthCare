@@ -23,15 +23,11 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     val updateImageLiveData = MediatorLiveData<ObjectResponse<Account>>()
     val updateCoverLiveData = MediatorLiveData<ObjectResponse<Account>>()
     val changePasswordLiveData = MediatorLiveData<ObjectResponse<Account>>()
-    val updateAddressBookLiveData = MediatorLiveData<User>()
 
     val medicalRecordLiveData = MediatorLiveData<ArrayList<MedicalRecord>>()
     val testResultLiveData = MediatorLiveData<ArrayList<TestResult>>()
     val treatmentLiveData = MediatorLiveData<TreatmentRegiment>()
     val infoAppLiveData = MediatorLiveData<Info>()
-
-    val allAddressLiveData = MediatorLiveData<ArrayList<ShoppingAddress>>()
-    val updateAddressResultLiveData = MediatorLiveData<String>()
 
     val getProfileLiveData = MediatorLiveData<User>()
     val error = MutableLiveData<Pair<String, Int?>>()
@@ -95,23 +91,6 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
 
     }
 
-    fun updateBookAddress(param: UpdateAddressParam) {
-        viewModelScope.launch {
-            updateAddressBookLiveData.addSource(repository.updateBookAddress(param)) {
-                when (it) {
-                    Result.Loading -> {
-                        isLoading.value = true
-                    }
-                    is Result.Error -> {
-                        error.value = Pair(it.message, it.code)
-                    }
-                    is Result.Success -> {
-                        updateAddressBookLiveData.value = it.data
-                    }
-                }
-            }
-        }
-    }
 
     fun changePassword(param: ChangePassParam) {
         viewModelScope.launch {
@@ -169,22 +148,7 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
             }
         }
     }
-    fun getAllAddress() {
-        viewModelScope.launch {
-            allAddressLiveData.addSource(repository.getAllAddress()) {
-                when (it) {
-                    is Result.Error -> {
-                        isLoading.value = false
-                        error.value = Pair(it.message, it.code)
-                    }
-                    is Result.Success -> {
-                        isLoading.value = false
-                        allAddressLiveData.value = it.data
-                    }
-                }
-            }
-        }
-    }
+
 
     val invoicesLiveData = MediatorLiveData<PagedList<ItemViewModel>>()
     val invoiceLoadStatusX = MutableLiveData<Result<ItemViewModel>>()

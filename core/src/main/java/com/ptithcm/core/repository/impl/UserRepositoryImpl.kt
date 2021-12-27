@@ -22,13 +22,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 
 class UserRepositoryImpl (val api: ApiService, val apiHealthCare: ApiHealthCareService): UserRepository {
-    override suspend fun updateBookAddress(param: UpdateAddressParam): LiveData<Result<User>> {
-        return object : NetworkBoundResource<User, User>(){
-            override fun processResponse(response: User) = response
-            override suspend fun createCall(): Response<User> = api.updateBookAddress(param)
 
-        }.build().asLiveData()
-    }
 
     override suspend fun changePassword(param: ChangePassParam): LiveData<Result<ObjectResponse<Account>>> {
         return object : NetworkBoundResource<ObjectResponse<Account>, ObjectResponse<Account>>(){
@@ -105,40 +99,6 @@ class UserRepositoryImpl (val api: ApiService, val apiHealthCare: ApiHealthCareS
             override fun processResponse(response: Info) = response
             override suspend fun createCall(): Response<Info> =
                 apiHealthCare.getVersionApp()
-        }.build().asLiveData()
-    }
-
-    override suspend fun getAllAddress(): LiveData<Result<ArrayList<ShoppingAddress>>> {
-        return object :
-            NetworkBoundResource<ArrayList<ShoppingAddress>, ArrayList<ShoppingAddress>>() {
-            override fun processResponse(response: ArrayList<ShoppingAddress>) = response
-            override suspend fun createCall(): Response<ArrayList<ShoppingAddress>> =
-                apiHealthCare.getAllAddress()
-        }.build().asLiveData()
-    }
-
-    override suspend fun addAddress(param: ShoppingAddress): LiveData<Result<ObjectResponse<Int>>> {
-        return object : NetworkBoundResource<ObjectResponse<Int>, ObjectResponse<Int>>() {
-            override fun processResponse(response: ObjectResponse<Int>) = response
-            override suspend fun createCall(): Response<ObjectResponse<Int>> =
-                apiHealthCare.addAddress(param)
-        }.build().asLiveData()
-    }
-
-
-    override suspend fun updateAddress(param: ShoppingAddress): LiveData<Result<ObjectResponse<Int>>> {
-        return object : NetworkBoundResource<ObjectResponse<Int>, ObjectResponse<Int>>() {
-            override fun processResponse(response: ObjectResponse<Int>) = response
-            override suspend fun createCall(): Response<ObjectResponse<Int>> =
-                apiHealthCare.updateAddress(param)
-        }.build().asLiveData()
-    }
-
-    override suspend fun deleteAddress(addressId: Int?): LiveData<Result<ObjectResponse<Int>>> {
-        return object : NetworkBoundResource<ObjectResponse<Int>, ObjectResponse<Int>>() {
-            override fun processResponse(response: ObjectResponse<Int>) = response
-            override suspend fun createCall(): Response<ObjectResponse<Int>> =
-                apiHealthCare.deleteAddress(addressId)
         }.build().asLiveData()
     }
 

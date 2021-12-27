@@ -230,14 +230,7 @@ class CreateReviewFragment : BaseFragment<FragmentCreateReviewBinding>() {
 
     fun onClick(v: View?) {
         when (v?.id) {
-            R.id.ivProduct -> {
-                navController.navigateAnimation(
-                    R.id.fragment_product_detail,
-                    bundle = bundleOf(
-                        "productId" to productInvoice?.id
-                    )
-                )
-            }
+
             R.id.ivImage1 -> {
                 if (checkNoImage(viewBinding.ivClearImg1))
                     openGallery(1, 1)

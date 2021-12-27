@@ -40,7 +40,7 @@ class MedicalHistoryBookFragment : BaseFragment<FragmentMedicalHistoryBookBindin
 
     private val adapter = MedicalHistoryPagedAdapter { it: Invoice?, _: Int? ->
         navController.navigateAnimation(
-            R.id.invoiceDetailFragment,
+            R.id.mediacalBillDetailFragment,
             bundle = bundleOf(
                 KEY_ARGUMENT to it?.id
             )

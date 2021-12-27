@@ -10,21 +10,13 @@
         android:name="com.ptithcm.healthcare.view.doctor.DoctorDetailFragment"
         tools:layout="@layout/fragment_doctor_detail"/>
 
-    <fragment
-        android:id="@+id/fragment_over_view"
-        android:name="com.ptithcm.healthcare.view.wishlist.OverViewFragment"
-        tools:layout="@layout/fragment_over_view"/>
 
     <fragment
         android:id="@+id/imageVideoFragment"
         android:name="com.ptithcm.healthcare.view.rating.ImageVideoFragment"
         tools:layout="@layout/fragment_image_video"/>
 
-    <fragment
-        android:id="@+id/sizeGuideFragment"
-        tools:layout="@layout/fragment_size_guide"
-        android:name="com.ptithcm.healthcare.view.sizeguide.SizeGuideFragment"
-        android:label="SizeGuideFragment" />
+
     <fragment
         android:id="@+id/questionFragment"
         tools:layout="@layout/fragment_question"

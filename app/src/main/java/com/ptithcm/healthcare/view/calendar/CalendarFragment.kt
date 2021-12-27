@@ -15,7 +15,6 @@ import com.ptithcm.healthcare.databinding.FragmentCalendarBinding
 import com.ptithcm.healthcare.ext.*
 import com.ptithcm.healthcare.view.MainActivity
 import com.ptithcm.healthcare.view.doctor.adapter.ConsultationRecyclerViewAdapter
-import com.ptithcm.healthcare.viewmodel.ProvidersViewModel
 import com.ptithcm.healthcare.viewmodel.MedicalBillViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,7 +23,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
 
     override val layoutId: Int = R.layout.fragment_calendar
 
-    private val providersViewModel: ProvidersViewModel by viewModel()
     private val medicalBillViewModel: MedicalBillViewModel by viewModel()
 
     private lateinit var consultationAdapter: ConsultationRecyclerViewAdapter
@@ -53,10 +51,7 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        getProviders()
-    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -118,10 +113,6 @@ class CalendarFragment : BaseFragment<FragmentCalendarBinding>() {
         }
     }
 
-
-    private fun getProviders() {
-        providersViewModel.getProviders()
-    }
 
     private fun listenerConsult(medicalBill: MedicalBill?) {
         navController.navigateAnimation(

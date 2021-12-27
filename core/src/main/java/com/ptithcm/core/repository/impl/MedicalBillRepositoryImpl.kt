@@ -8,14 +8,14 @@ import com.ptithcm.core.model.*
 import com.ptithcm.core.model.wish.ObjectResponse
 import com.ptithcm.core.param.AddProductParam
 import com.ptithcm.core.param.MedicalBillParam
-import com.ptithcm.core.repository.ShoppingCardRepository
+import com.ptithcm.core.repository.MedicalBillRepository
 import com.ptithcm.core.util.ObjectHandler
 import com.ptithcm.core.vo.MessageResponse
 import com.ptithcm.core.vo.Result
 import retrofit2.Response
 
-class ShoppingCardRepositoryImpl(val api: ApiService, val apiHealthCareService: ApiHealthCareService) :
-    ShoppingCardRepository {
+class MedicalBillRepositoryImpl(val api: ApiService, val apiHealthCareService: ApiHealthCareService) :
+    MedicalBillRepository {
 
     override suspend fun updateBasket(param: AddProductParam): LiveData<Result<Basket>> {
         return object : NetworkBoundResource<Basket, Basket>() {

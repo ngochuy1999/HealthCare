@@ -7,13 +7,6 @@ import com.ptithcm.core.vo.ItemViewModel
 import com.ptithcm.core.vo.Listing
 
 interface CarouselDetailRepository {
-    suspend fun getPagingProductsCarousel(
-        param: ProductsOfCategoryRequestParam
-    ): Listing<ItemViewModel>
-
-    suspend fun getPagingProductsProvider(
-        param: ProductsOfProviderRequestParam
-    ): Listing<ItemViewModel>
 
     suspend fun getPagingRefineProduct(
         searchParam: SearchParams?

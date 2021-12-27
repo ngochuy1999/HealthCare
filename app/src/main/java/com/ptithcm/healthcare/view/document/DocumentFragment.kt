@@ -16,7 +16,6 @@ import com.ptithcm.healthcare.ext.initToolBar
 import com.ptithcm.healthcare.view.MainActivity
 import com.ptithcm.healthcare.view.authentication.AuthenticationActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_brand_term_condition.*
 
 class DocumentFragment : BaseFragment<FragmentDocumentBinding>() {
     override val layoutId: Int

@@ -22,7 +22,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.ptithcm.healthcare.R
 import com.ptithcm.healthcare.constant.MENU_ADD_PRODUCT_ID
-import com.ptithcm.healthcare.databinding.FragmentRefineBinding
 
 fun View.visible() {
     this.visibility = View.VISIBLE
@@ -193,35 +192,6 @@ fun View.runAnimationAlpha(isShow: Boolean) {
     }
 }
 
-fun FragmentRefineBinding.chooseView(
-    isNewItems: Boolean = false,
-    isOurPicks: Boolean = false,
-    isPriceHigh: Boolean = false,
-    isPriceLow: Boolean = false
-) {
-    when {
-        isNewItems -> {
-            this.ivRightOldItems.isSelected = false
-            this.ivRightPriceHigh.isSelected = false
-            this.ivRightPriceLow.isSelected = false
-        }
-        isOurPicks -> {
-            this.ivRightNewItems.isSelected = false
-            this.ivRightPriceHigh.isSelected = false
-            this.ivRightPriceLow.isSelected = false
-        }
-        isPriceHigh -> {
-            this.ivRightNewItems.isSelected = false
-            this.ivRightOldItems.isSelected = false
-            this.ivRightPriceLow.isSelected = false
-        }
-        isPriceLow -> {
-            this.ivRightNewItems.isSelected = false
-            this.ivRightOldItems.isSelected = false
-            this.ivRightPriceHigh.isSelected = false
-        }
-    }
-}
 
 fun BottomNavigationView.updateItem(isBrand: Boolean) {
 //    if (isBrand) {
@@ -252,8 +222,6 @@ fun BottomNavigationView.updateItem(isBrand: Boolean) {
 fun BottomNavigationView.disableLongClick() {
     this.apply {
         findViewById<BottomNavigationItemView>(R.id.nav_home)?.setOnLongClickListener { true }
-        findViewById<BottomNavigationItemView>(R.id.nav_designer)?.setOnLongClickListener { true }
-        findViewById<BottomNavigationItemView>(R.id.nav_wish)?.setOnLongClickListener { true }
         findViewById<BottomNavigationItemView>(R.id.nav_profile)?.setOnLongClickListener { true }
         findViewById<BottomNavigationItemView>(MENU_ADD_PRODUCT_ID)?.setOnLongClickListener { true }
     }

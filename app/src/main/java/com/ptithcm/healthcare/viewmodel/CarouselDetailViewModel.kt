@@ -18,57 +18,6 @@ class CarouselDetailViewModel(private val repository: CarouselDetailRepository) 
     val networkState = MutableLiveData<Boolean>()
     val productLoadStatusX = MutableLiveData<Result<ItemViewModel>>()
 
-    val productsCategoriesLiveData = MediatorLiveData<PagedList<ItemViewModel>>()
-    fun getPagingProductsCategories(param: ProductsOfCategoryRequestParam?) {
-        param ?: return
-        viewModelScope.launch {
-            val request =
-                repository.getPagingProductsCarousel(param)
-            productsCategoriesLiveData.addSource(request.result) {
-                productsCategoriesLiveData.value = it
-            }
-            productsCategoriesLiveData.addSource(request.status) {
-                productLoadStatusX.value = it
-                when (it) {
-                    is Result.Loading -> {
-                        networkState.value = true
-                    }
-                    is Result.Error -> {
-                        networkState.value = false
-                    }
-                    is Result.Success -> {
-                        networkState.value = false
-                    }
-                }
-            }
-        }
-    }
-
-    val productsProviderLiveData = MediatorLiveData<PagedList<ItemViewModel>>()
-    fun getPagingProductsProvider(param: ProductsOfProviderRequestParam?) {
-        param ?: return
-        viewModelScope.launch {
-            val request =
-                repository.getPagingProductsProvider(param)
-            productsProviderLiveData.addSource(request.result) {
-                productsProviderLiveData.value = it
-            }
-            productsProviderLiveData.addSource(request.status) {
-                productLoadStatusX.value = it
-                when (it) {
-                    is Result.Loading -> {
-                        networkState.value = true
-                    }
-                    is Result.Error -> {
-                        networkState.value = false
-                    }
-                    is Result.Success -> {
-                        networkState.value = false
-                    }
-                }
-            }
-        }
-    }
 
     val refineProductLiveData = MediatorLiveData<PagedList<ItemViewModel>>()
     val networkStateRefine = MutableLiveData<Boolean>()

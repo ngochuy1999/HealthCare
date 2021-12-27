@@ -9,21 +9,8 @@
         tools:layout="@layout/fragment_home"
         android:name="com.ptithcm.healthcare.view.home.HomeFragment" />
 
-    <fragment android:id="@+id/fragment_all_categories"
-        tools:layout="@layout/fragment_all_categories"
-        android:name="com.ptithcm.healthcare.view.allcategories.AllCategoriesFragment">
-
-        <action android:id="@+id/action_categories_detail"
-            app:destination="@id/nav_categories_detail"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
-
-    </fragment>
 
     <include  app:graph="@navigation/nav_carousel_detail"/>
-    <include  app:graph="@navigation/nav_categories_detail"/>
 
     <include app:graph="@navigation/nav_search" />
     <include app:graph="@navigation/nav_doctor"/>

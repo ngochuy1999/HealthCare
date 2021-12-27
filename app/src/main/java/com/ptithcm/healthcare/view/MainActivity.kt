@@ -3,9 +3,7 @@ package com.ptithcm.healthcare.view
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ptithcm.healthcare.R
@@ -14,18 +12,13 @@ import com.ptithcm.healthcare.constant.PERMISSION_CAMERA
 import com.ptithcm.healthcare.constant.PERMISSION_GALLERY
 import com.ptithcm.healthcare.databinding.ActivityMainBinding
 import com.ptithcm.healthcare.ext.*
-import com.ptithcm.healthcare.view.uploadproduct.UploadProductActivity
 import com.ptithcm.healthcare.viewmodel.*
-import org.jetbrains.anko.startActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     private var currentNavController: LiveData<NavController>? = null
 
     override val layoutId: Int = R.layout.activity_main
-    private val viewModel: ProductFilterViewModel by viewModel()
-    private val brandViewModel: BrandsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +26,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
         }
-        brandViewModel.getBrands()
-        brandViewModel.getStories()
-        viewModel.getProductFilter()
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -45,17 +35,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onSupportNavigateUp(): Boolean {
         return currentNavController?.value?.navigateUp() ?: false
-    }
-
-    override fun bindViewModel() {
-        super.bindViewModel()
-
-        brandViewModel.pagedList.observe(this, Observer {})
-        viewModel.error.observe(this, Observer {
-            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-        })
-        brandViewModel.brandsLiveData.observe(this, Observer { })
-        brandViewModel.storesLiveData.observe(this, Observer {})
     }
 
     /**
@@ -68,7 +47,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             R.navigation.nav_home,
             R.navigation.nav_calendar,
             R.navigation.nav_file,
-            R.navigation.nav_message,
+            R.navigation.nav_notification,
             R.navigation.nav_profile
         )
 
@@ -114,9 +93,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
             !hasReadStoragePermission() -> {
                 requestReadAndWriteStoragePermission(PERMISSION_GALLERY)
-            }
-            else -> {
-                startActivity<UploadProductActivity>()
             }
         }
     }

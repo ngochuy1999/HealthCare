@@ -24,7 +24,6 @@ import com.ptithcm.healthcare.util.PopUp
 import com.ptithcm.healthcare.view.MainActivity
 import com.ptithcm.healthcare.view.addressbook.adapter.ExpiryDateAdapter
 import com.ptithcm.healthcare.viewmodel.ListenerViewModel
-import com.ptithcm.healthcare.viewmodel.SharedViewModel
 import com.stripe.android.ApiResultCallback
 import com.stripe.android.Stripe
 import com.stripe.android.model.Card
@@ -43,7 +42,6 @@ class CreditCardDetailFragment : BaseFragment<FragmentDetailCreditCardBinding>()
     private var expiryMonth = 0
     private var expiryYear = 0
     private var creditCard: CreditCard? = null
-    private lateinit var sharedViewModel: SharedViewModel
     private lateinit var stripe: Stripe
     private var numberCreditCard = -1
     private var isPopBackStack = false
@@ -55,8 +53,6 @@ class CreditCardDetailFragment : BaseFragment<FragmentDetailCreditCardBinding>()
             creditCard = bundle.getParcelable("card") as CreditCard?
             numberCreditCard = bundle.getInt("numberOfCards")
         }
-        sharedViewModel =
-            activity?.let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }!!
         stripe = Stripe(requireContext(), BuildConfig.PUBLISHABLE_KEY)
     }
 

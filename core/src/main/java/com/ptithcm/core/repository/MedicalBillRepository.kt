@@ -8,7 +8,7 @@ import com.ptithcm.core.param.MedicalBillParam
 import com.ptithcm.core.vo.MessageResponse
 import com.ptithcm.core.vo.Result
 
-interface ShoppingCardRepository {
+interface MedicalBillRepository {
     suspend fun updateBasket(param: AddProductParam): LiveData<Result<Basket>>
 
     suspend fun getAllCard(): LiveData<Result<Basket>>

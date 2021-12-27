@@ -7,14 +7,11 @@ import androidx.lifecycle.viewModelScope
 import com.ptithcm.core.model.*
 import com.ptithcm.core.model.wish.ObjectResponse
 import com.ptithcm.core.param.MedicalBillParam
-import com.ptithcm.core.repository.ShoppingCardRepository
-import com.ptithcm.core.util.ObjectHandler
+import com.ptithcm.core.repository.MedicalBillRepository
 import com.ptithcm.core.vo.Result
 import kotlinx.coroutines.launch
 
-class MedicalBillViewModel(val repo: ShoppingCardRepository) : ViewModel() {
-    val cartResult = MediatorLiveData<ArrayList<ProductClothesDetail>>()
-    val detailResult = MediatorLiveData<ProductClothesDetail>()
+class MedicalBillViewModel(val repo: MedicalBillRepository) : ViewModel() {
     val consultationResult = MediatorLiveData<ArrayList<MedicalBill>>()
     val isLikeResult = MediatorLiveData<ObjectResponse<Boolean>>()
     val testFormResult = MediatorLiveData<ArrayList<TestForm>>()
@@ -25,45 +22,6 @@ class MedicalBillViewModel(val repo: ShoppingCardRepository) : ViewModel() {
 
     val error = MutableLiveData<Pair<String, Int?>>()
     val isLoading = MutableLiveData<Boolean>()
-
-    fun getAllProductsInCart(ids: List<Int>) {
-        viewModelScope.launch {
-            cartResult.addSource(repo.getAllProductsInCart(ids)) {
-                when (it) {
-                    Result.Loading -> {
-                    }
-                    is Result.Error -> {
-                        error.value = Pair(it.message, it.code)
-                    }
-                    is Result.Success -> {
-                        if (!it.data.isNullOrEmpty()) {
-                            ObjectHandler.cart?.products = it.data ?: arrayListOf()
-                            ObjectHandler.saveCartToPref()
-                        }
-                        cartResult.value = it.data
-                    }
-                }
-            }
-        }
-    }
-
-
-    fun getProdDetail(id: Int) {
-        viewModelScope.launch {
-            detailResult.addSource(repo.getProductDetail(id)) {
-                when (it) {
-                    Result.Loading -> {
-                    }
-                    is Result.Error -> {
-                        error.value = Pair(it.message, it.code)
-                    }
-                    is Result.Success -> {
-                        detailResult.value = it.data?.data
-                    }
-                }
-            }
-        }
-    }
 
     fun getTestForm(id: Int) {
         viewModelScope.launch {
